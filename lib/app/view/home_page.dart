@@ -12,22 +12,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
-          currentPageIndex = index;
-        },
-        destinations: const <Widget>[
-          NavigationDestination(
-            selectedIcon: Icon(Icons.home),
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.people),
-            icon: Icon(Icons.people_outlined),
-            label: 'Floor',
-          ),
-        ],
+      appBar: AppBar(
+        title: const Text('Home Page'),
+        centerTitle: true,
       ),
       body: Row(
         children: [
@@ -35,9 +22,27 @@ class _HomePageState extends State<HomePage> {
             child: ListView.builder(
               itemCount: 5,
               itemBuilder: (context, index) {
+                final buttonText = (index.isEven) ? 'Agent' : 'Queue';
                 return Card(
-                  child: ListTile(
-                    title: Text('Item $index'),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListTile(
+                        title: Text(
+                          'Recommendation $index: Click to view details.',
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: FilledButton.tonal(
+                            onPressed: () {},
+                            child: Text(buttonText),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 );
               },
@@ -49,14 +54,14 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   child: Card(
                     child: Center(
-                      child: Text('Top Card'),
+                      child: Text('Recommendation Details'),
                     ),
                   ),
                 ),
                 Expanded(
                   child: Card(
                     child: Center(
-                      child: Text('Bottom Card'),
+                      child: Text('Recommendation Charts'),
                     ),
                   ),
                 ),
