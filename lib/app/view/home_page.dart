@@ -15,6 +15,15 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Home Page'),
         centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: IconButton(
+              icon: const Icon(Icons.refresh),
+              onPressed: () {},
+            ),
+          ),
+        ],
       ),
       body: Row(
         children: [
