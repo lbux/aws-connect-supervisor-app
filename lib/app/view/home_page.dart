@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -93,11 +92,7 @@ class _HomePageState extends State<HomePage> {
                   child: Card(
                     color: colorScheme.secondaryContainer,
                     child: Center(
-                      child: Image.file(
-                        File(
-                          'temp.svg',
-                        ),
-                      ),
+                      child: SvgPicture.asset('temp.svg'),
                     ),
                   ),
                 ),
