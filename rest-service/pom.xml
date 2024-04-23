@@ -11,7 +11,7 @@
 	<groupId>com.cs180</groupId>
 	<artifactId>rest-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>rest-service</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
