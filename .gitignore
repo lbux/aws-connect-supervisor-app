@@ -1,3 +1,4 @@
-.idea
-target
+.idea/
+target/
 /getstarted/target/
+/rest-service/target/
