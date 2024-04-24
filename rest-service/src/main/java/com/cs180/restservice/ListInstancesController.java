@@ -23,7 +23,7 @@ public class ListInstancesController {
         logger.info("/// TESTING LOGGER OUTPUT ///");
 
         Handler handler = new Handler();
-        List<String> output = handler.sendRequest();
+        List<String> output = handler.sendRequestListInstances();
 
         return new ListInstances(
                 counter.incrementAndGet(),

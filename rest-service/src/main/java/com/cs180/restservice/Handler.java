@@ -16,7 +16,7 @@ public class Handler {
         connectClient = DependencyFactory.connectClient();
     }
 
-    public List<String> sendRequest() {
+    public List<String> sendRequestListInstances() {
         // invoking the api calls using connectClient.
         return listAllInstances(connectClient);
     }
