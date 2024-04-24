@@ -89,6 +89,6 @@ public class Handler {
 //        output.add("null");
 //        output.add("null");
 //        return output;
-        continue;
+        return null;
     }
 }
