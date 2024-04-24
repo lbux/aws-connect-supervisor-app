@@ -21,6 +21,11 @@ public class Handler {
         return listAllInstances(connectClient);
     }
 
+    public List<String> sendRequestServiceLevel() {
+        // invoking the api calls using connectClient.
+        return getServiceLevel15(connectClient);
+    }
+
     public static List<String> listAllInstances(ConnectClient connectClient) {
         try {
             ListInstancesRequest instancesRequest = ListInstancesRequest.builder()
@@ -55,5 +60,35 @@ public class Handler {
         output.add("null");
         output.add("null");
         return output;
+    }
+
+    public static List<String> getServiceLevel15(ConnectClient connectClient) {
+//        try {
+//            ListInstancesRequest instancesRequest = ListInstancesRequest.builder()
+//                    .maxResults(10)
+//                    .build();
+//
+//            ListInstancesResponse response = connectClient.listInstances(instancesRequest);
+//            List<InstanceSummary> instances = response.instanceSummaryList();
+//
+//            InstanceSummary instance = instances.get(0);
+//
+//            List<String> output = new ArrayList<>(3);
+//            output.add(instance.id());
+//            output.add(instance.instanceAlias());
+//            output.add(instance.arn());
+//
+//            return output;
+//
+//        } catch (ConnectException e) {
+//            System.out.println(e.getLocalizedMessage());
+//            System.exit(1);
+//        }
+//        List<String> output = new ArrayList<>(3);
+//        output.add("null");
+//        output.add("null");
+//        output.add("null");
+//        return output;
+        continue;
     }
 }
