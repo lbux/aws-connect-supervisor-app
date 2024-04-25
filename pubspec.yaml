@@ -7,6 +7,7 @@ environment:
   sdk: "^3.3.0"
 
 dependencies:
+  auto_size_text: ^3.0.0
   bloc: ^8.1.3
   dynamic_color: ^1.7.0
   flutter:
@@ -14,6 +15,7 @@ dependencies:
   flutter_bloc: ^8.1.4
   flutter_localizations:
     sdk: flutter
+  flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.10+1
   go_router: ^13.2.3
   intl: ^0.18.1
