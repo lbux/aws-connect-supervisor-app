@@ -4,7 +4,7 @@ import software.amazon.awssdk.http.apache.ApacheHttpClient;
 import software.amazon.awssdk.services.connect.ConnectClient;
 
 /**
- * The module containing all dependencies required by the {@link Handler}.
+ * The module containing all dependencies required by the {@link ConnectHandler}.
  */
 public class DependencyFactory {
 

@@ -1,4 +1,4 @@
-package com.cs180.restservice;
+package com.cs180.restservice.listInstances;
 
 public record ListInstances(long id,
                             String instanceId,

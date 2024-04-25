@@ -1,9 +1,9 @@
-package com.cs180.restservice;
+package com.cs180.restservice.listInstances;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.cs180.restservice.ConnectHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.slf4j.Logger;
@@ -22,7 +22,7 @@ public class ListInstancesController {
 
         logger.info("/// TESTING LOGGER OUTPUT ///");
 
-        Handler handler = new Handler();
+        ConnectHandler handler = new ConnectHandler();
         List<String> output = handler.sendRequestListInstances();
 
         return new ListInstances(
