@@ -1,12 +1,13 @@
 package com.cs180.restservice;
 
+import com.cs180.restservice.util.AgentInfo;
+import com.cs180.restservice.util.Constants;
 import software.amazon.awssdk.services.connect.ConnectClient;
 import software.amazon.awssdk.services.connect.model.*;
 
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ConnectHandler {
     private final ConnectClient connectClient;
@@ -16,8 +17,11 @@ public class ConnectHandler {
     }
 
     public List<String> sendRequestListInstances() {
-        // invoking the api calls using connectClient.
         return listAllInstances(connectClient);
+    }
+
+    public AgentInfo sendRequestAgentInfo(String userId) {
+        return describeUsers(connectClient, userId);
     }
 
     public Double sendRequestServiceLevel() {
@@ -60,6 +64,28 @@ public class ConnectHandler {
         return output;
     }
 
+    public static AgentInfo describeUsers(ConnectClient connectClient, String userId) {
+        try {
+            DescribeUserRequest userRequest = DescribeUserRequest.builder()
+                    .instanceId(Constants.INSTANCE_ID)
+                    .userId(userId)
+                    .build();
+
+            DescribeUserResponse response = connectClient.describeUser(userRequest);
+            String username = response.user().username();
+            String firstName = response.user().identityInfo().firstName();
+            String lastName = response.user().identityInfo().lastName();
+
+            return new AgentInfo(userId, username, firstName, lastName);
+
+        } catch (ConnectException e) {
+            System.out.println(e.getLocalizedMessage());
+            System.out.println("Agent/User with ID: " + userId + " does not exist.");
+            System.exit(1);
+        }
+        return null;
+    }
+
     public static Double getServiceLevel15(ConnectClient connectClient) {
         try {
             List<ThresholdV2> thresholds = new ArrayList<>(1);
@@ -96,9 +122,6 @@ public class ConnectHandler {
                     .build();
 
             GetMetricDataV2Response response = connectClient.getMetricDataV2(metricRequest);
-//            System.out.println("getServiceLevel15 response");
-//            System.out.println(response.toString());
-//            System.out.println(response.metricResults().get(0).collections().get(0).value());
             return response.metricResults().get(0).collections().get(0).value();
 
         } catch (ConnectException e) {

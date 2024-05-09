@@ -16,7 +16,7 @@ public class ServiceLevelController {
     private final AtomicLong counter = new AtomicLong();
 
     @GetMapping("/servicelevel")
-    public ServiceLevel servicelevel() {
+    public ServiceLevel serviceLevel() {
 
         logger.info("/// TESTING LOGGER OUTPUT ///");
 
