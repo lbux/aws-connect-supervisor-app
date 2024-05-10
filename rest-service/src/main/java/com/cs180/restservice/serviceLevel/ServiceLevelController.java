@@ -3,6 +3,7 @@ package com.cs180.restservice.serviceLevel;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.cs180.restservice.ConnectHandler;
+import com.cs180.restservice.util.Insight;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,16 +17,16 @@ public class ServiceLevelController {
     private final AtomicLong counter = new AtomicLong();
 
     @GetMapping("/servicelevel")
-    public ServiceLevel serviceLevel() {
+    public Insight serviceLevel() {
 
         logger.info("/// TESTING LOGGER OUTPUT ///");
 
         ConnectHandler handler = new ConnectHandler();
         Double SL15value = handler.sendRequestServiceLevel();
 
-        ServiceLevel sl;
+        Insight sl;
         if (SL15value <= 40) {
-            sl = new ServiceLevel(
+            sl = new Insight(
                     counter.incrementAndGet(),
                     SL15value,
                     "Service Level 15 for Basic Queue has dropped below 40%",
@@ -37,7 +38,7 @@ public class ServiceLevelController {
                     "To improve SL 15, consider optimizing staffing level by assigning more available agents to Basic queue."
             );
         } else {
-            sl = new ServiceLevel(
+            sl = new Insight(
                     counter.incrementAndGet(),
                     null,
                     null,

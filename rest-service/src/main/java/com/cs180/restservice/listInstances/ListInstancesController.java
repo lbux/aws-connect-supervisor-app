@@ -3,6 +3,7 @@ package com.cs180.restservice.listInstances;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.cs180.restservice.ConnectHandler;
+import com.cs180.restservice.util.ListInstances;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
