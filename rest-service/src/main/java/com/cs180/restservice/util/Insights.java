@@ -5,13 +5,16 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
-public record Insights(long id,
-                       List<Insight> insights,
-                       String timestamp) {
+public record Insights(String id,
+                       String timestamp,
+                       List<Insight> insights) {
 
-    public Insights(long id, List<Insight> insights) {
-        this(id, insights, getFormattedTimestamp());
+    private static final AtomicLong counter = new AtomicLong();
+
+    public Insights(List<Insight> insights) {
+        this("IL-" + counter.incrementAndGet(), getFormattedTimestamp(), insights);
     }
 
     private static String getFormattedTimestamp() {

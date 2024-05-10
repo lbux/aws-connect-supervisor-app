@@ -17,8 +17,6 @@ import java.util.concurrent.atomic.AtomicLong;
 public class InsightsController {
     private static final Logger logger = LoggerFactory.getLogger(InsightsController.class);
 
-    private final AtomicLong counter = new AtomicLong();
-
     public static Queues queues;
 
     @GetMapping("/insights")
@@ -35,8 +33,9 @@ public class InsightsController {
         ArrayList<Insight> insightList = new ArrayList<>();
 
         insightList.add(ServiceLevelController.serviceLevel());
+        insightList.add(ServiceLevelController.serviceLevel());
 
-        Insights insights = new Insights(counter.incrementAndGet(), insightList);
+        Insights insights = new Insights(insightList);
 
         return insights;
     }

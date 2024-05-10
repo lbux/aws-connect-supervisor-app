@@ -14,8 +14,6 @@ import org.slf4j.LoggerFactory;
 public class ServiceLevelController {
     private static final Logger logger = LoggerFactory.getLogger(ServiceLevelController.class);
 
-    private static final AtomicLong counter = new AtomicLong();
-
     @GetMapping("/servicelevel")
     public static Insight serviceLevel() {
 
@@ -27,7 +25,6 @@ public class ServiceLevelController {
         Insight sl;
         if (SL15value <= 40) {
             sl = new Insight(
-                    counter.incrementAndGet(),
                     SL15value,
                     "Service Level 15 for Basic Queue has dropped below 40%",
                     "Basic Queue (ID: 19dfef86-2020-46d3-b881-976564077825) Service Level 15 " +
@@ -38,13 +35,7 @@ public class ServiceLevelController {
                     "To improve SL 15, consider optimizing staffing level by assigning more available agents to Basic queue."
             );
         } else {
-            sl = new Insight(
-                    counter.incrementAndGet(),
-                    null,
-                    null,
-                    null,
-                    null
-            );
+            sl = new Insight();
         }
         return sl;
     }
