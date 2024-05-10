@@ -14,10 +14,10 @@ import org.slf4j.LoggerFactory;
 public class ServiceLevelController {
     private static final Logger logger = LoggerFactory.getLogger(ServiceLevelController.class);
 
-    private final AtomicLong counter = new AtomicLong();
+    private static final AtomicLong counter = new AtomicLong();
 
     @GetMapping("/servicelevel")
-    public Insight serviceLevel() {
+    public static Insight serviceLevel() {
 
         logger.info("/// TESTING LOGGER OUTPUT ///");
 
