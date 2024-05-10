@@ -2,7 +2,7 @@
 
 Repository for UCI ICS CS 180A/B Capstone Project with AWS Sponsor
 
-## Steps to Run
+## Steps to Run Backend
    
 ```bash
 cd rest-service
