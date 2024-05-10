@@ -28,6 +28,10 @@ public class ConnectHandler {
         return getServiceLevel15(connectClient);
     }
 
+    public Double sendRequestQueueAvgHandleTime(String queueId) {
+        return getQueueAvgHandleTime(connectClient, queueId);
+    }
+
     public static List<String> listAllInstances(ConnectClient connectClient) {
         try {
             ListInstancesRequest instancesRequest = ListInstancesRequest.builder()
@@ -119,6 +123,43 @@ public class ConnectHandler {
                     .filters(filters)
                     .resourceArn("arn:aws:connect:us-west-2:471112891051:instance/9198298a-bdc4-4f38-9156-76e99f4c84b0")
                     .maxResults(10)
+                    .build();
+
+            GetMetricDataV2Response response = connectClient.getMetricDataV2(metricRequest);
+            return response.metricResults().get(0).collections().get(0).value();
+
+        } catch (ConnectException e) {
+            System.out.println("getServiceLevel15 ConnectException");
+            System.out.println(e.getLocalizedMessage());
+            System.exit(1);
+        }
+        return null;
+    }
+
+    public static Double getQueueAvgHandleTime(ConnectClient connectClient, String queueId) {
+        try {
+            List<MetricV2> metrics = new ArrayList<>(1);
+            MetricV2 metric = MetricV2.builder()
+                    .name("AVG_HANDLE_TIME")
+                    .build();
+            metrics.add(metric);
+
+            List<String> filterValues = new ArrayList<>(1);
+            filterValues.add(queueId);
+
+            List<FilterV2> filters = new ArrayList<>(1);
+            FilterV2 filter = FilterV2.builder()
+                    .filterKey("QUEUE")
+                    .filterValues(filterValues)
+                    .build();
+            filters.add(filter);
+
+            GetMetricDataV2Request metricRequest = GetMetricDataV2Request.builder()
+                    .startTime(Instant.ofEpochSecond(1712356707))
+                    .endTime(Instant.ofEpochSecond(1712443492))
+                    .metrics(metrics)
+                    .filters(filters)
+                    .resourceArn(Constants.RESOURCE_ARN)
                     .build();
 
             GetMetricDataV2Response response = connectClient.getMetricDataV2(metricRequest);
