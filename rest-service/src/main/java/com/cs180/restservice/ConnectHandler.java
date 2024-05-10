@@ -2,6 +2,8 @@ package com.cs180.restservice;
 
 import com.cs180.restservice.util.AgentInfo;
 import com.cs180.restservice.util.Constants;
+import com.cs180.restservice.util.Queue;
+import com.cs180.restservice.util.QueueStore;
 import software.amazon.awssdk.services.connect.ConnectClient;
 import software.amazon.awssdk.services.connect.model.*;
 
@@ -12,8 +14,15 @@ import java.util.List;
 public class ConnectHandler {
     private final ConnectClient connectClient;
 
+    // TODO: move this from connect handler into main insight controller
+    public static QueueStore queueStore;
+
     public ConnectHandler() {
         connectClient = DependencyFactory.connectClient();
+    }
+
+    public void populateQueueStore() {
+        populateQueueStore(connectClient);
     }
 
     public List<String> sendRequestListInstances() {
@@ -30,6 +39,34 @@ public class ConnectHandler {
 
     public Double sendRequestQueueAvgHandleTime(String queueId) {
         return getQueueAvgHandleTime(connectClient, queueId);
+    }
+
+    ///////// END of Send Request Methods, START of Connect Methods /////////
+
+    /*
+    IMPORTANT: only call once at start up to reduce overhead
+     */
+    public static void populateQueueStore(ConnectClient connectClient) {
+        try {
+//            List<QueueType> queueTypes = new ArrayList<>(1);
+//            QueueType queueType = QueueType.STANDARD;
+//            queueTypes.add(queueType);
+
+            ListQueuesRequest queuesRequest = ListQueuesRequest.builder()
+                    .instanceId(Constants.INSTANCE_ID)
+                    .queueTypes(QueueType.STANDARD)
+                    .build();
+
+            ListQueuesResponse response = connectClient.listQueues(queuesRequest);
+            for (QueueSummary queue : response.queueSummaryList()) {
+                Queue q = new Queue(queue.id(), queue.name());
+                queueStore.addQueue(q);
+            }
+
+        } catch (ConnectException e) {
+            System.out.println(e.getLocalizedMessage());
+            System.exit(1);
+        }
     }
 
     public static List<String> listAllInstances(ConnectClient connectClient) {
