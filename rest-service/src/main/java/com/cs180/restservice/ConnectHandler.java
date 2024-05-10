@@ -2,8 +2,7 @@ package com.cs180.restservice;
 
 import com.cs180.restservice.util.AgentInfo;
 import com.cs180.restservice.util.Constants;
-import com.cs180.restservice.util.Queue;
-import com.cs180.restservice.util.QueueStore;
+import com.cs180.restservice.util.Queues;
 import software.amazon.awssdk.services.connect.ConnectClient;
 import software.amazon.awssdk.services.connect.model.*;
 
@@ -18,7 +17,7 @@ public class ConnectHandler {
         connectClient = DependencyFactory.connectClient();
     }
 
-    public QueueStore sendRequestPopulateQueueStore() {
+    public Queues sendRequestPopulateQueueStore() {
         return populateQueueStore(connectClient);
     }
 
@@ -43,8 +42,8 @@ public class ConnectHandler {
     /*
     IMPORTANT: only call once at start up to reduce overhead
      */
-    public static QueueStore populateQueueStore(ConnectClient connectClient) {
-        QueueStore queueStore = new QueueStore();
+    public static Queues populateQueueStore(ConnectClient connectClient) {
+        Queues queues = new Queues();
 
         try {
             ListQueuesRequest queuesRequest = ListQueuesRequest.builder()
@@ -54,8 +53,7 @@ public class ConnectHandler {
 
             ListQueuesResponse response = connectClient.listQueues(queuesRequest);
             for (QueueSummary queue : response.queueSummaryList()) {
-                Queue q = new Queue(queue.id(), queue.name());
-                queueStore.addQueue(q);
+                queues.addQueue(queue.id(), queue.name());
             }
 
         } catch (ConnectException e) {
@@ -63,7 +61,7 @@ public class ConnectHandler {
             System.exit(1);
         }
 
-        return queueStore;
+        return queues;
     }
 
     public static List<String> listAllInstances(ConnectClient connectClient) {

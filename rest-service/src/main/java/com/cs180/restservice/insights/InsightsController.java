@@ -1,7 +1,7 @@
 package com.cs180.restservice.insights;
 
 import com.cs180.restservice.ConnectHandler;
-import com.cs180.restservice.util.QueueStore;
+import com.cs180.restservice.util.Queues;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,19 +15,19 @@ public class InsightsController {
 
     private final AtomicLong counter = new AtomicLong();
 
-    public static QueueStore queueStore;
+    public static Queues queues;
 
     @GetMapping("/insights")
-    public QueueStore insights() {
+    public Queues insights() {
 
         logger.info("/// TESTING LOGGER OUTPUT ///");
 
         ConnectHandler handler = new ConnectHandler();
-        QueueStore queueStore = handler.sendRequestPopulateQueueStore();
+        Queues queues = handler.sendRequestPopulateQueueStore();
 
         logger.info("/// QUEUE STORE OUTPUT ///");
-        logger.info(queueStore.toString());
+        logger.info(queues.toString());
 
-        return queueStore;
+        return queues;
     }
 }
