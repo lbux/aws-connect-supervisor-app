@@ -14,15 +14,12 @@ import java.util.List;
 public class ConnectHandler {
     private final ConnectClient connectClient;
 
-    // TODO: move this from connect handler into main insight controller
-    public static QueueStore queueStore;
-
     public ConnectHandler() {
         connectClient = DependencyFactory.connectClient();
     }
 
-    public void populateQueueStore() {
-        populateQueueStore(connectClient);
+    public QueueStore sendRequestPopulateQueueStore() {
+        return populateQueueStore(connectClient);
     }
 
     public List<String> sendRequestListInstances() {
@@ -46,12 +43,10 @@ public class ConnectHandler {
     /*
     IMPORTANT: only call once at start up to reduce overhead
      */
-    public static void populateQueueStore(ConnectClient connectClient) {
-        try {
-//            List<QueueType> queueTypes = new ArrayList<>(1);
-//            QueueType queueType = QueueType.STANDARD;
-//            queueTypes.add(queueType);
+    public static QueueStore populateQueueStore(ConnectClient connectClient) {
+        QueueStore queueStore = new QueueStore();
 
+        try {
             ListQueuesRequest queuesRequest = ListQueuesRequest.builder()
                     .instanceId(Constants.INSTANCE_ID)
                     .queueTypes(QueueType.STANDARD)
@@ -67,6 +62,8 @@ public class ConnectHandler {
             System.out.println(e.getLocalizedMessage());
             System.exit(1);
         }
+
+        return queueStore;
     }
 
     public static List<String> listAllInstances(ConnectClient connectClient) {

@@ -12,4 +12,15 @@ public class QueueStore {
     public void addQueue(Queue queue) {
         queues.add(queue);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("QueueStore:\n");
+        for (int i = 0; i < queues.size(); i++) {
+            sb.append("Queue ").append(i + 1).append(": ");
+            sb.append(queues.get(i)).append("\n");
+        }
+        return sb.toString();
+    }
 }

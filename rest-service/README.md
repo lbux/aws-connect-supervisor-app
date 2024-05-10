@@ -9,3 +9,4 @@ README for /rest-service
   - move queue store from connect handler to insight controller
 - change avghandletime queue id from basic to iter over all queues
 - make QueueStore a hashmap instead of arraylist
+- check unused imports in all files
