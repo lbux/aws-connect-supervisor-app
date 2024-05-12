@@ -25,7 +25,7 @@ public class InsightsController {
         logger.info("/// TESTING LOGGER OUTPUT ///");
 
         ConnectHandler handler = new ConnectHandler();
-        queues = handler.sendRequestPopulateQueueStore();
+        queues = handler.sendRequestPopulateQueues();
 
         logger.info("/// QUEUE STORE OUTPUT ///");
         logger.info(queues.toString());

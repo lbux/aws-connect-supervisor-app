@@ -17,8 +17,8 @@ public class ConnectHandler {
         connectClient = DependencyFactory.connectClient();
     }
 
-    public Queues sendRequestPopulateQueueStore() {
-        return populateQueueStore(connectClient);
+    public Queues sendRequestPopulateQueues() {
+        return populateQueues(connectClient);
     }
 
     public List<String> sendRequestListInstances() {
@@ -26,7 +26,7 @@ public class ConnectHandler {
     }
 
     public AgentInfo sendRequestAgentInfo(String userId) {
-        return describeUsers(connectClient, userId);
+        return describeUser(connectClient, userId);
     }
 
     public Double sendRequestServiceLevel() {
@@ -42,7 +42,7 @@ public class ConnectHandler {
     /*
     IMPORTANT: only call once at start up to reduce overhead
      */
-    public static Queues populateQueueStore(ConnectClient connectClient) {
+    public static Queues populateQueues(ConnectClient connectClient) {
         Queues queues = new Queues();
 
         try {
@@ -100,7 +100,7 @@ public class ConnectHandler {
         return output;
     }
 
-    public static AgentInfo describeUsers(ConnectClient connectClient, String userId) {
+    public static AgentInfo describeUser(ConnectClient connectClient, String userId) {
         try {
             DescribeUserRequest userRequest = DescribeUserRequest.builder()
                     .instanceId(Constants.INSTANCE_ID)
