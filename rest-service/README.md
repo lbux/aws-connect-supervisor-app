@@ -8,6 +8,8 @@
 - Check for unused imports in all files.
 - Iterate over all queues for service level, remove Basic Queue
 - SL connect handler: remove index out of bounds from catch and add proper check
+- remove Constants.java (inserted constants into connectinstance.java)
+  - replace constants used in connecthandler.java by passing in ConnectInstance
 
 avg handling time todo:
 - Iterate over all queues for avg_handle_time
