@@ -27,11 +27,11 @@ public class AvgHandleTimeController {
 
         handler.sendRequestPopulateQueues(instance);
 
-        return getAvgHandleTime(handler, instance);
+        return getAvgHandleTimeQueueInsights(handler, instance);
     }
 
-    public static Optional<Insights> getAvgHandleTime(ConnectHandler handler, ConnectInstance instance) {
-        logger.info("/// AVG HANDLE TIME FUNCTION CALLED ///");
+    public static Optional<Insights> getAvgHandleTimeQueueInsights(ConnectHandler handler, ConnectInstance instance) {
+        logger.info("/// GET AVG HANDLE TIME FUNCTION CALLED ///");
 
         Insights avgHandleTimeInsightList = new Insights();
 
@@ -47,10 +47,6 @@ public class AvgHandleTimeController {
 
             avgHandleTimeInsightList.insights().add(insight);
         }
-
-        System.out.println(avgHandleTimeInsightList);
-
-        System.out.println(avgHandleTimeInsightList.insights());
 
         if (avgHandleTimeInsightList.insights().isEmpty()) {
             return Optional.empty();

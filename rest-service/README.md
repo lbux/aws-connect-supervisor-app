@@ -7,6 +7,7 @@
 - SL connect handler: remove index out of bounds from catch and add proper check
 - remove Constants.java (inserted constants into connectinstance.java)
   - replace all constants used in connecthandler.java by passing in ConnectInstance
+- add null check in ALL controllers (for now, i create Insight for each queue despite null values)
 
 service level todo:
 - Iterate over all queues, remove hardcoded Basic Queue in handler
@@ -17,8 +18,7 @@ avg handling time todo:
 - Iterate over list of agents for avg_handle_time
 - Compare agent's time to queue's and return insight if wayyy over
 - Fill in insight with agent details for insight
-- add check for null avg handle values
-- avg handle time return optional list of insight, optional insight works in endpoint, list doesnt
+- add check to avoid insights with null avg handle values
 
 
 

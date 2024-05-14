@@ -35,10 +35,12 @@ public class InsightsController {
         ArrayList<Insight> insightList = new ArrayList<>();
 
         // INSIGHT #1: queue's service level over 40%
-        ServiceLevelController.serviceLevel(handler).ifPresent(insightList::add);
+        ServiceLevelController.getServiceLevelQueueInsights(handler, instance)
+                .map(Insights::insights)
+                .ifPresent(insightList::addAll);
 
         // INSIGHT #2: an agent's avg handling time is way over their queue level over 40%
-        AvgHandleTimeController.getAvgHandleTime(handler, instance)
+        AvgHandleTimeController.getAvgHandleTimeQueueInsights(handler, instance)
                 .map(Insights::insights)
                 .ifPresent(insightList::addAll);
 

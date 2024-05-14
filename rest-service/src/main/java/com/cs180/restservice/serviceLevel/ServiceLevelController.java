@@ -3,7 +3,9 @@ package com.cs180.restservice.serviceLevel;
 import java.util.Optional;
 
 import com.cs180.restservice.ConnectHandler;
+import com.cs180.restservice.util.ConnectInstance;
 import com.cs180.restservice.util.Insight;
+import com.cs180.restservice.util.Insights;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,26 +17,45 @@ public class ServiceLevelController {
     private static final Logger logger = LoggerFactory.getLogger(ServiceLevelController.class);
 
     @GetMapping("/servicelevel")
-    public static Optional<Insight> serviceLevel(ConnectHandler handler) {
-        logger.info("/// TESTING LOGGER OUTPUT ///");
+    public static Optional<Insights> serviceLevel(ConnectHandler handler, ConnectInstance instance) {
+        logger.info("/// SERVICE LEVEL ENDPOINT CALLED ///");
 
-        Optional<Double> SL15 = handler.sendRequestServiceLevel();
+        handler.sendRequestPopulateQueues(instance);
 
-        if (SL15.isPresent()) {
-            Double SL15value = SL15.get();
-            if (SL15value <= 40) {
-                return Optional.of(new Insight(
-                        SL15value,
-                        "Service Level 15 for Basic Queue has dropped below 40%",
-                        "Basic Queue (ID: 19dfef86-2020-46d3-b881-976564077825) Service Level 15 " +
-                                "(percentage of contacts answered within past 15 seconds) " +
-                                "has dropped below 40%. Low answer rate indicates low efficiency " +
-                                "and could lead to increased customer dissatisfaction, increased abandon rates. " +
-                                "Current agents may also experience difficulties with increased contact volume.",
-                        "To improve SL 15, consider optimizing staffing level by assigning more available agents to Basic queue."
-                ));
+        return getServiceLevelQueueInsights(handler, instance);
+    }
+
+    public static Optional<Insights> getServiceLevelQueueInsights(ConnectHandler handler, ConnectInstance instance) {
+        logger.info("/// GET SERVICE LEVEL FUNCTION CALLED ///");
+
+        Insights serviceLevelInsightList = new Insights();
+
+        for (String queueId : instance.getQueues().keySet()) {
+            Optional<Double> SL15 = handler.sendRequestServiceLevel(queueId);
+
+            if (SL15.isPresent()) {
+                Double SL15value = SL15.get();
+                String queueName = instance.getQueues().get(queueId);
+                if (SL15value <= 40) {
+                    Insight insight = new Insight(
+                            SL15value,
+                            "Service Level 15 for " + queueName + " has dropped below 40%",
+                            queueName + " (ID: "+ queueId +") Service Level 15 has dropped below 40%. " +
+                                    "SL 15 is the percentage of contacts answered within past 15 seconds). " +
+                                    "Low answer rate indicates low efficiency " +
+                                    "and could lead to increased customer dissatisfaction, increased abandon rates. " +
+                                    "Current agents may also experience difficulties with increased contact volume.",
+                            "To improve SL 15, consider optimizing staffing level by assigning more available agents to " + queueName + "."
+                    );
+
+                    serviceLevelInsightList.insights().add(insight);
+                }
             }
         }
-        return Optional.empty();
+
+        if (serviceLevelInsightList.insights().isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(serviceLevelInsightList);
     }
 }

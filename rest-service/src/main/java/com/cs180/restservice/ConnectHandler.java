@@ -30,8 +30,8 @@ public class ConnectHandler {
         return describeUser(connectClient, userId);
     }
 
-    public Optional<Double> sendRequestServiceLevel() {
-        return getServiceLevel15(connectClient);
+    public Optional<Double> sendRequestServiceLevel(String queueId) {
+        return getServiceLevel15(connectClient, queueId);
     }
 
     public Double sendRequestQueueAvgHandleTime(String queueId) {
@@ -119,7 +119,7 @@ public class ConnectHandler {
         return null;
     }
 
-    public static Optional<Double> getServiceLevel15(ConnectClient connectClient) {
+    public static Optional<Double> getServiceLevel15(ConnectClient connectClient, String queueId) {
         try {
             List<ThresholdV2> thresholds = new ArrayList<>(1);
             ThresholdV2 threshold = ThresholdV2.builder()
@@ -136,7 +136,7 @@ public class ConnectHandler {
             metrics.add(metric);
 
             List<String> filterValues = new ArrayList<>(1);
-            filterValues.add("19dfef86-2020-46d3-b881-976564077825");
+            filterValues.add(queueId);
 
             List<FilterV2> filters = new ArrayList<>(1);
             FilterV2 filter = FilterV2.builder()
