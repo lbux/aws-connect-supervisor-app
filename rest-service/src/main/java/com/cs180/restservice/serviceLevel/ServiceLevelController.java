@@ -15,13 +15,11 @@ public class ServiceLevelController {
     private static final Logger logger = LoggerFactory.getLogger(ServiceLevelController.class);
 
     @GetMapping("/servicelevel")
-    public static Optional<Insight> serviceLevel() {
-
+    public static Optional<Insight> serviceLevel(ConnectHandler handler) {
         logger.info("/// TESTING LOGGER OUTPUT ///");
 
-        ConnectHandler handler = new ConnectHandler();
-
         Optional<Double> SL15 = handler.sendRequestServiceLevel();
+
         if (SL15.isPresent()) {
             Double SL15value = SL15.get();
             if (SL15value <= 40) {

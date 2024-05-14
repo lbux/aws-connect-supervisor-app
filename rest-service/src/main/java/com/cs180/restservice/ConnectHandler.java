@@ -1,8 +1,8 @@
 package com.cs180.restservice;
 
 import com.cs180.restservice.util.AgentInfo;
+import com.cs180.restservice.util.ConnectInstance;
 import com.cs180.restservice.util.Constants;
-import com.cs180.restservice.util.Queues;
 import software.amazon.awssdk.services.connect.ConnectClient;
 import software.amazon.awssdk.services.connect.model.*;
 
@@ -18,8 +18,8 @@ public class ConnectHandler {
         connectClient = DependencyFactory.connectClient();
     }
 
-    public Queues sendRequestPopulateQueues() {
-        return populateQueues(connectClient);
+    public void sendRequestPopulateQueues(ConnectInstance instance) {
+        populateQueues(connectClient, instance);
     }
 
     public List<String> sendRequestListInstances() {
@@ -43,9 +43,7 @@ public class ConnectHandler {
     /*
     IMPORTANT: only call once at start up to reduce overhead
      */
-    public static Queues populateQueues(ConnectClient connectClient) {
-        Queues queues = new Queues();
-
+    public static void populateQueues(ConnectClient connectClient, ConnectInstance instance) {
         try {
             ListQueuesRequest queuesRequest = ListQueuesRequest.builder()
                     .instanceId(Constants.INSTANCE_ID)
@@ -54,15 +52,13 @@ public class ConnectHandler {
 
             ListQueuesResponse response = connectClient.listQueues(queuesRequest);
             for (QueueSummary queue : response.queueSummaryList()) {
-                queues.addQueue(queue.id(), queue.name());
+                instance.addQueue(queue.id(), queue.name());
             }
 
         } catch (ConnectException e) {
             System.out.println(e.getLocalizedMessage());
             System.exit(1);
         }
-
-        return queues;
     }
 
     public static List<String> listAllInstances(ConnectClient connectClient) {
@@ -150,10 +146,10 @@ public class ConnectHandler {
             filters.add(filter);
 
             GetMetricDataV2Request metricRequest = GetMetricDataV2Request.builder()
-                    .startTime(Instant.ofEpochSecond(1715647396))
-                    .endTime(Instant.ofEpochSecond(1715647467))
-//                    .startTime(Instant.ofEpochSecond(1712359075))
-//                    .endTime(Instant.ofEpochSecond(1712445432))
+//                    .startTime(Instant.ofEpochSecond(1715647396)) // for empty metric results
+//                    .endTime(Instant.ofEpochSecond(1715647467))
+                    .startTime(Instant.ofEpochSecond(1712359075)) // for present metric results
+                    .endTime(Instant.ofEpochSecond(1712445432))
                     .metrics(metrics)
                     .filters(filters)
                     .resourceArn("arn:aws:connect:us-west-2:471112891051:instance/9198298a-bdc4-4f38-9156-76e99f4c84b0")
