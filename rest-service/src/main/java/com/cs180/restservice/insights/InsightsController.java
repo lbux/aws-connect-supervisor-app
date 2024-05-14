@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Optional;
 
 @RestController
 public class InsightsController {
@@ -32,8 +32,12 @@ public class InsightsController {
 
         ArrayList<Insight> insightList = new ArrayList<>();
 
-        insightList.add(ServiceLevelController.serviceLevel());
-        insightList.add(ServiceLevelController.serviceLevel());
+        // INSIGHT #1: queue's service level over 40%
+        ServiceLevelController.serviceLevel().ifPresent(insightList::add);
+
+        // INSIGHT #2: an agent's avg handling time is way over their queue level over 40%
+        // TODO: EDIT THIS PART TO ACTUALLY BE AVG_HANDLING_TIME
+        ServiceLevelController.serviceLevel().ifPresent(insightList::add);
 
         Insights insights = new Insights(insightList);
 

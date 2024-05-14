@@ -9,6 +9,7 @@ import software.amazon.awssdk.services.connect.model.*;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ConnectHandler {
     private final ConnectClient connectClient;
@@ -29,7 +30,7 @@ public class ConnectHandler {
         return describeUser(connectClient, userId);
     }
 
-    public Double sendRequestServiceLevel() {
+    public Optional<Double> sendRequestServiceLevel() {
         return getServiceLevel15(connectClient);
     }
 
@@ -122,7 +123,7 @@ public class ConnectHandler {
         return null;
     }
 
-    public static Double getServiceLevel15(ConnectClient connectClient) {
+    public static Optional<Double> getServiceLevel15(ConnectClient connectClient) {
         try {
             List<ThresholdV2> thresholds = new ArrayList<>(1);
             ThresholdV2 threshold = ThresholdV2.builder()
@@ -149,8 +150,10 @@ public class ConnectHandler {
             filters.add(filter);
 
             GetMetricDataV2Request metricRequest = GetMetricDataV2Request.builder()
-                    .startTime(Instant.ofEpochSecond(1712359075))
-                    .endTime(Instant.ofEpochSecond(1712445432))
+                    .startTime(Instant.ofEpochSecond(1715647396))
+                    .endTime(Instant.ofEpochSecond(1715647467))
+//                    .startTime(Instant.ofEpochSecond(1712359075))
+//                    .endTime(Instant.ofEpochSecond(1712445432))
                     .metrics(metrics)
                     .filters(filters)
                     .resourceArn("arn:aws:connect:us-west-2:471112891051:instance/9198298a-bdc4-4f38-9156-76e99f4c84b0")
@@ -158,14 +161,13 @@ public class ConnectHandler {
                     .build();
 
             GetMetricDataV2Response response = connectClient.getMetricDataV2(metricRequest);
-            return response.metricResults().get(0).collections().get(0).value();
+            return response.metricResults().get(0).collections().get(0).value().describeConstable();
 
-        } catch (ConnectException e) {
-            System.out.println("getServiceLevel15 ConnectException");
+        } catch (ConnectException | IndexOutOfBoundsException e) {
             System.out.println(e.getLocalizedMessage());
-            System.exit(1);
+//            System.exit(1);
         }
-        return null;
+        return Optional.empty();
     }
 
     public static Double getQueueAvgHandleTime(ConnectClient connectClient, String queueId) {
