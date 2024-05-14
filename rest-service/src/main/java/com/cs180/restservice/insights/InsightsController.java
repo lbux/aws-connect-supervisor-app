@@ -38,7 +38,7 @@ public class InsightsController {
         ServiceLevelController.serviceLevel(handler).ifPresent(insightList::add);
 
         // INSIGHT #2: an agent's avg handling time is way over their queue level over 40%
-        AvgHandleTimeController.avgHandleTime(handler, instance)
+        AvgHandleTimeController.getAvgHandleTime(handler, instance)
                 .map(Insights::insights)
                 .ifPresent(insightList::addAll);
 
