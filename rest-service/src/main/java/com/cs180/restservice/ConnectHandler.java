@@ -195,10 +195,9 @@ public class ConnectHandler {
             GetMetricDataV2Response response = connectClient.getMetricDataV2(metricRequest);
             return response.metricResults().get(0).collections().get(0).value();
 
-        } catch (ConnectException e) {
-            System.out.println("getServiceLevel15 ConnectException");
+        } catch (ConnectException | IndexOutOfBoundsException e) {
             System.out.println(e.getLocalizedMessage());
-            System.exit(1);
+//            System.exit(1);
         }
         return null;
     }

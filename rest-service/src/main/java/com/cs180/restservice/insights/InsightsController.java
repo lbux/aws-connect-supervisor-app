@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @RestController
 public class InsightsController {
@@ -37,7 +38,9 @@ public class InsightsController {
         ServiceLevelController.serviceLevel(handler).ifPresent(insightList::add);
 
         // INSIGHT #2: an agent's avg handling time is way over their queue level over 40%
-        AvgHandleTimeController.avgHandleTime(handler, instance).ifPresent(insightList::add);
+        AvgHandleTimeController.avgHandleTime(handler, instance)
+                .map(Insights::insights)
+                .ifPresent(insightList::addAll);
 
         Insights insights = new Insights(insightList);
 

@@ -1,25 +1,24 @@
 ## README for /rest-service
 
 ### _TO-DO:_
-
 - Save output in JSON format.
 - Check for unused imports in all files.
 - Iterate over all queues for service level, remove Basic Queue
 - SL connect handler: remove index out of bounds from catch and add proper check
 - remove Constants.java (inserted constants into connectinstance.java)
   - replace all constants used in connecthandler.java by passing in ConnectInstance
-- replace optional insight with optional list of insights
 
 service level todo:
 - Iterate over all queues, remove hardcoded Basic Queue in handler
 - Change magic start and end epoch times to the last 30 seconds.
 
 avg handling time todo:
-- Iterate over all queues for avg_handle_time
 - Obtain list of agents assigned to a queue ()
 - Iterate over list of agents for avg_handle_time
 - Compare agent's time to queue's and return insight if wayyy over
 - Fill in insight with agent details for insight
+- add check for null avg handle values
+- avg handle time return optional list of insight, optional insight works in endpoint, list doesnt
 
 
 
