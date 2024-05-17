@@ -1,16 +1,15 @@
 package com.cs180.restservice.serviceLevel;
 
-import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.cs180.restservice.ConnectHandler;
-import com.cs180.restservice.util.ConnectInstance;
 import com.cs180.restservice.util.Insight;
 import com.cs180.restservice.util.Insights;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Optional;
 
 @RestController
 public class ServiceLevelController {

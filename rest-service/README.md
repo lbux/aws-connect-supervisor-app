@@ -8,10 +8,7 @@
 
 ### _TO-DO:_
 
-- Check for unused imports in all files.
-- remove Constants.java (replaced with connectinstance.java)
-    - replace all use of Constants in connecthandler.java by passing in ConnectInstance
-- combine all metricdatav2 requests into one (later)
+- explore later: combine all metricdatav2 requests into one
 
 service level todo:
 

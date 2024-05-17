@@ -1,14 +1,15 @@
 package com.cs180.restservice.avgHandleTime;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.cs180.restservice.ConnectHandler;
 import com.cs180.restservice.util.Insight;
 import com.cs180.restservice.util.Insights;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.Optional;
 
 @RestController
 public class AvgHandleTimeController {

@@ -1,15 +1,14 @@
 package com.cs180.restservice.listInstances;
 
-import java.util.concurrent.atomic.AtomicLong;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.cs180.restservice.ConnectHandler;
 import com.cs180.restservice.util.ListInstances;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.List;
 
 @RestController
