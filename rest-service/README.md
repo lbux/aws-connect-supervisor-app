@@ -8,6 +8,12 @@
 
 ### _TO-DO:_
 
+- maintaining the same insight (same insight id) even after refresh until resolved
+    - could provide insight in how long it takes for certain types of insights to get resolved?
+- identifying which agents to reassign to a queue
+    - already have problematic queue id
+    - iter through other queues -> getCurrentUserData to get agent ids and their status & num chats/voice they can take
+    - start with no logic for agent selection, just pick first n agents?
 - explore later: combine all metricdatav2 requests into one
 
 service level todo:

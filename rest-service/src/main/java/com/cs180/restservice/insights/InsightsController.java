@@ -23,9 +23,7 @@ public class InsightsController {
         logger.info("/// TESTING LOGGER OUTPUT ///");
 
         ConnectHandler handler = new ConnectHandler();
-
-//        handler.sendRequestPopulateQueues(instance);
-
+        
         logger.info("/// QUEUE STORE OUTPUT ///");
         logger.info(handler.instance.getQueues().toString());
 
@@ -36,7 +34,8 @@ public class InsightsController {
                 .map(Insights::insights)
                 .ifPresent(insightList::addAll);
 
-        // INSIGHT #2: an agent's avg handling time is way over their queue level over 40%
+        // INSIGHT #2: a queue or an agent's avg handling time is over 60 seconds
+        // fix and change into: an agent's avg handling time is way over their queue level over 40%
         AvgHandleTimeController.getAvgHandleTimeQueueInsights(handler)
                 .map(Insights::insights)
                 .ifPresent(insightList::addAll);
