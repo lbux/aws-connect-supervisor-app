@@ -11,10 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -35,17 +32,34 @@ public class AvgHandleTimeController {
 
         Insights avgHandleTimeInsightList = new Insights();
 
+        // queue insights
         for (String queueId : instance.getQueues().keySet()) {
-            Double queueAvgHandleTimeValue = handler.sendRequestQueueAvgHandleTime(queueId);
+            Optional<Double> queueAvgHandleTimeValue = handler.sendRequestQueueAvgHandleTime(queueId);
 
-            Insight insight = new Insight(
-                    queueAvgHandleTimeValue,
-                    "Display Queue " + queueId + " Avg Handle Time",
-                    "Queue " + queueId + " maps to Queue Name: " + instance.getQueues().get(queueId),
-                    "N/A"
-            );
+            if (queueAvgHandleTimeValue.isPresent() && queueAvgHandleTimeValue.get() > 60) {
+                Insight insight = new Insight(
+                        queueAvgHandleTimeValue.get(),
+                        "Display Queue " + queueId + " Avg Handle Time",
+                        "Queue " + queueId + " maps to Queue Name: " + instance.getQueues().get(queueId),
+                        "N/A"
+                );
+                avgHandleTimeInsightList.insights().add(insight);
+            }
 
-            avgHandleTimeInsightList.insights().add(insight);
+            for (String agentId : handler.sendRequestAgentsInQueue(queueId)) {
+                Optional<Double> agentAvgHandleTimeValue = handler.sendRequestAgentAvgHandleTime(queueId, agentId);
+
+                if (agentAvgHandleTimeValue.isPresent() && agentAvgHandleTimeValue.get() > 60) {
+                    Insight insight = new Insight(
+                            agentAvgHandleTimeValue.get(),
+                            "Display Agent " + agentId + " in " + instance.getQueues().get(queueId) + " Avg Handle Time",
+                            "Agent Details: " + handler.sendRequestAgentInfo(agentId),
+                            "N/A"
+                    );
+                    avgHandleTimeInsightList.insights().add(insight);
+                }
+            }
+
         }
 
         if (avgHandleTimeInsightList.insights().isEmpty()) {

@@ -7,9 +7,8 @@ import software.amazon.awssdk.services.connect.ConnectClient;
 import software.amazon.awssdk.services.connect.model.*;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ConnectHandler {
     private final ConnectClient connectClient;
@@ -30,12 +29,20 @@ public class ConnectHandler {
         return describeUser(connectClient, userId);
     }
 
+    public Set<String> sendRequestAgentsInQueue(String queueId) {
+        return getCurrentUserData(connectClient, queueId);
+    }
+
     public Optional<Double> sendRequestServiceLevel(String queueId) {
         return getServiceLevel15(connectClient, queueId);
     }
 
-    public Double sendRequestQueueAvgHandleTime(String queueId) {
+    public Optional<Double> sendRequestQueueAvgHandleTime(String queueId) {
         return getQueueAvgHandleTime(connectClient, queueId);
+    }
+
+    public Optional<Double> sendRequestAgentAvgHandleTime(String queueId, String agentId) {
+        return getAgentAvgHandleTime(connectClient, queueId, agentId);
     }
 
     ///////// END of Send Request Methods, START of Connect Methods /////////
@@ -119,6 +126,29 @@ public class ConnectHandler {
         return null;
     }
 
+    public static Set<String> getCurrentUserData(ConnectClient connectClient, String queueId) {
+        try {
+            UserDataFilters filters = UserDataFilters.builder()
+                    .queues(Collections.singleton(queueId))
+                    .build();
+
+            GetCurrentUserDataRequest userRequest = GetCurrentUserDataRequest.builder()
+                    .instanceId(Constants.INSTANCE_ID)
+                    .filters(filters)
+                    .build();
+
+            GetCurrentUserDataResponse response = connectClient.getCurrentUserData(userRequest);
+
+            return response.userDataList().stream()
+                    .map(userData -> userData.user().id())
+                    .collect(Collectors.toSet());
+
+        } catch (ConnectException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+        return null;
+    }
+
     public static Optional<Double> getServiceLevel15(ConnectClient connectClient, String queueId) {
         try {
             List<ThresholdV2> thresholds = new ArrayList<>(1);
@@ -166,7 +196,7 @@ public class ConnectHandler {
         return Optional.empty();
     }
 
-    public static Double getQueueAvgHandleTime(ConnectClient connectClient, String queueId) {
+    public static Optional<Double> getQueueAvgHandleTime(ConnectClient connectClient, String queueId) {
         try {
             List<MetricV2> metrics = new ArrayList<>(1);
             MetricV2 metric = MetricV2.builder()
@@ -193,12 +223,60 @@ public class ConnectHandler {
                     .build();
 
             GetMetricDataV2Response response = connectClient.getMetricDataV2(metricRequest);
-            return response.metricResults().get(0).collections().get(0).value();
+            if (!response.metricResults().isEmpty()) {
+                return Optional.of(response.metricResults().get(0).collections().get(0).value());
+            }
+
+        } catch (ConnectException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+        return Optional.empty();
+    }
+
+    public static Optional<Double> getAgentAvgHandleTime(ConnectClient connectClient, String queueId, String agentId) {
+        try {
+            List<MetricV2> metrics = new ArrayList<>(1);
+            MetricV2 metric = MetricV2.builder()
+                    .name("AVG_HANDLE_TIME")
+                    .build();
+            metrics.add(metric);
+
+            List<String> filterValues = new ArrayList<>(1);
+            filterValues.add(agentId);
+
+            List<String> filterValues2 = new ArrayList<>(1);
+            filterValues2.add(queueId);
+
+            List<FilterV2> filters = new ArrayList<>(1);
+
+            FilterV2 filter = FilterV2.builder()
+                    .filterKey("AGENT")
+                    .filterValues(filterValues)
+                    .build();
+            filters.add(filter);
+
+            FilterV2 filter2 = FilterV2.builder()
+                    .filterKey("QUEUE")
+                    .filterValues(filterValues2)
+                    .build();
+            filters.add(filter2);
+
+            GetMetricDataV2Request metricRequest = GetMetricDataV2Request.builder()
+                    .startTime(Instant.ofEpochSecond(1712356707))
+                    .endTime(Instant.ofEpochSecond(1712443492))
+                    .metrics(metrics)
+                    .filters(filters)
+                    .resourceArn(Constants.RESOURCE_ARN)
+                    .build();
+
+            GetMetricDataV2Response response = connectClient.getMetricDataV2(metricRequest);
+            if (!response.metricResults().isEmpty()) {
+                return Optional.of(response.metricResults().get(0).collections().get(0).value());
+            }
 
         } catch (ConnectException | IndexOutOfBoundsException e) {
             System.out.println(e.getLocalizedMessage());
-//            System.exit(1);
         }
-        return null;
+        return Optional.empty();
     }
 }

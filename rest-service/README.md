@@ -12,10 +12,10 @@
 service level todo:
 - Iterate over all queues, remove hardcoded Basic Queue in handler
 - Change magic start and end epoch times to the last 30 seconds.
+- write real time sl function (don't replace existing)
+  - check if no calls and no answers means SL is 0 and gives insight (which it shouldn't)
 
 avg handling time todo:
-- Obtain list of agents assigned to a queue ()
-- Iterate over list of agents for avg_handle_time
 - Compare agent's time to queue's and return insight if wayyy over
 - Fill in insight with agent details for insight
 - add check to avoid insights with null avg handle values
