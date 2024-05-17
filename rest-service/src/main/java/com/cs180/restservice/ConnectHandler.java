@@ -42,10 +42,33 @@ public class ConnectHandler {
     }
 
     public Optional<Double> sendRequestAgentAvgHandleTime(String queueId, String agentId) {
-        return getAgentAvgHandleTime(connectClient, queueId, agentId);
+        return getAgentInQueueAvgHandleTime(connectClient, queueId, agentId);
     }
 
-    ///////// END of Send Request Methods, START of Connect Methods /////////
+    ///////// ^ END of Send Request Methods /////////
+
+    public static List<FilterV2> getFilters(String queueId, String agentId) {
+        List<FilterV2> filters = new ArrayList<>();
+
+        if (queueId != null) {
+            FilterV2 filter1 = FilterV2.builder()
+                    .filterKey("QUEUE")
+                    .filterValues(List.of(queueId))
+                    .build();
+            filters.add(filter1);
+        }
+
+        if (agentId != null) {
+            FilterV2 filter2 = FilterV2.builder()
+                    .filterKey("AGENT")
+                    .filterValues(List.of(agentId))
+                    .build();
+            filters.add(filter2);
+        }
+        return filters;
+    }
+
+    ///////// ^ END of Helper Methods /////////
 
     /*
     IMPORTANT: only call once at start up to reduce overhead
@@ -165,33 +188,24 @@ public class ConnectHandler {
                     .build();
             metrics.add(metric);
 
-            List<String> filterValues = new ArrayList<>(1);
-            filterValues.add(queueId);
-
-            List<FilterV2> filters = new ArrayList<>(1);
-            FilterV2 filter = FilterV2.builder()
-                    .filterKey("QUEUE")
-                    .filterValues(filterValues)
-                    .build();
-            filters.add(filter);
-
             GetMetricDataV2Request metricRequest = GetMetricDataV2Request.builder()
 //                    .startTime(Instant.ofEpochSecond(1715647396)) // for empty metric results
 //                    .endTime(Instant.ofEpochSecond(1715647467))
                     .startTime(Instant.ofEpochSecond(1712359075)) // for present metric results
                     .endTime(Instant.ofEpochSecond(1712445432))
                     .metrics(metrics)
-                    .filters(filters)
+                    .filters(getFilters(queueId, null))
                     .resourceArn("arn:aws:connect:us-west-2:471112891051:instance/9198298a-bdc4-4f38-9156-76e99f4c84b0")
                     .maxResults(10)
                     .build();
 
             GetMetricDataV2Response response = connectClient.getMetricDataV2(metricRequest);
-            return response.metricResults().get(0).collections().get(0).value().describeConstable();
+            if (!response.metricResults().isEmpty()) {
+                return Optional.of(response.metricResults().get(0).collections().get(0).value());
+            }
 
-        } catch (ConnectException | IndexOutOfBoundsException e) {
+        } catch (ConnectException e) {
             System.out.println(e.getLocalizedMessage());
-//            System.exit(1);
         }
         return Optional.empty();
     }
@@ -204,21 +218,11 @@ public class ConnectHandler {
                     .build();
             metrics.add(metric);
 
-            List<String> filterValues = new ArrayList<>(1);
-            filterValues.add(queueId);
-
-            List<FilterV2> filters = new ArrayList<>(1);
-            FilterV2 filter = FilterV2.builder()
-                    .filterKey("QUEUE")
-                    .filterValues(filterValues)
-                    .build();
-            filters.add(filter);
-
             GetMetricDataV2Request metricRequest = GetMetricDataV2Request.builder()
                     .startTime(Instant.ofEpochSecond(1712356707))
                     .endTime(Instant.ofEpochSecond(1712443492))
                     .metrics(metrics)
-                    .filters(filters)
+                    .filters(getFilters(queueId, null))
                     .resourceArn(Constants.RESOURCE_ARN)
                     .build();
 
@@ -233,7 +237,7 @@ public class ConnectHandler {
         return Optional.empty();
     }
 
-    public static Optional<Double> getAgentAvgHandleTime(ConnectClient connectClient, String queueId, String agentId) {
+    public static Optional<Double> getAgentInQueueAvgHandleTime(ConnectClient connectClient, String queueId, String agentId) {
         try {
             List<MetricV2> metrics = new ArrayList<>(1);
             MetricV2 metric = MetricV2.builder()
@@ -241,31 +245,11 @@ public class ConnectHandler {
                     .build();
             metrics.add(metric);
 
-            List<String> filterValues = new ArrayList<>(1);
-            filterValues.add(agentId);
-
-            List<String> filterValues2 = new ArrayList<>(1);
-            filterValues2.add(queueId);
-
-            List<FilterV2> filters = new ArrayList<>(1);
-
-            FilterV2 filter = FilterV2.builder()
-                    .filterKey("AGENT")
-                    .filterValues(filterValues)
-                    .build();
-            filters.add(filter);
-
-            FilterV2 filter2 = FilterV2.builder()
-                    .filterKey("QUEUE")
-                    .filterValues(filterValues2)
-                    .build();
-            filters.add(filter2);
-
             GetMetricDataV2Request metricRequest = GetMetricDataV2Request.builder()
                     .startTime(Instant.ofEpochSecond(1712356707))
                     .endTime(Instant.ofEpochSecond(1712443492))
                     .metrics(metrics)
-                    .filters(filters)
+                    .filters(getFilters(queueId, agentId))
                     .resourceArn(Constants.RESOURCE_ARN)
                     .build();
 
@@ -274,7 +258,7 @@ public class ConnectHandler {
                 return Optional.of(response.metricResults().get(0).collections().get(0).value());
             }
 
-        } catch (ConnectException | IndexOutOfBoundsException e) {
+        } catch (ConnectException e) {
             System.out.println(e.getLocalizedMessage());
         }
         return Optional.empty();

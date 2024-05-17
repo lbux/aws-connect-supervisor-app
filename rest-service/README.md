@@ -1,25 +1,19 @@
 ## README for /rest-service
 
 ### _TO-DO:_
-- Save output in JSON format.
 - Check for unused imports in all files.
-- Iterate over all queues for service level, remove Basic Queue
-- SL connect handler: remove index out of bounds from catch and add proper check
-- remove Constants.java (inserted constants into connectinstance.java)
-  - replace all constants used in connecthandler.java by passing in ConnectInstance
-- add null check in ALL controllers (for now, i create Insight for each queue despite null values)
+- remove Constants.java (replaced with connectinstance.java)
+  - replace all use of Constants in connecthandler.java by passing in ConnectInstance
+- combine all metricdatav2 requests into one (later)
 
 service level todo:
-- Iterate over all queues, remove hardcoded Basic Queue in handler
 - Change magic start and end epoch times to the last 30 seconds.
 - write real time sl function (don't replace existing)
   - check if no calls and no answers means SL is 0 and gives insight (which it shouldn't)
 
 avg handling time todo:
 - Compare agent's time to queue's and return insight if wayyy over
-- Fill in insight with agent details for insight
-- add check to avoid insights with null avg handle values
-
+- write proper insight, reason, and action
 
 
 ### _Example Insight List (called by and sent to Frontend):_
