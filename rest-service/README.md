@@ -1,22 +1,31 @@
 ## README for /rest-service
 
+### _Notes:_
+
+- Moved ConnectInstance init into Handler for cohesion. Even though each endpoint inits new Handler (therefore new
+  ConnectInstance and new listQueues calls), this should ok since these endpoints will not be used (only main
+  /insights)
+
 ### _TO-DO:_
+
 - Check for unused imports in all files.
 - remove Constants.java (replaced with connectinstance.java)
-  - replace all use of Constants in connecthandler.java by passing in ConnectInstance
+    - replace all use of Constants in connecthandler.java by passing in ConnectInstance
 - combine all metricdatav2 requests into one (later)
 
 service level todo:
+
 - Change magic start and end epoch times to the last 30 seconds.
 - write real time sl function (don't replace existing)
-  - check if no calls and no answers means SL is 0 and gives insight (which it shouldn't)
+    - check if no calls and no answers means SL is 0 and gives insight (which it shouldn't)
 
 avg handling time todo:
+
 - Compare agent's time to queue's and return insight if wayyy over
 - write proper insight, reason, and action
 
-
 ### _Example Insight List (called by and sent to Frontend):_
+
 ```json
 {
   "id": "IL-1",

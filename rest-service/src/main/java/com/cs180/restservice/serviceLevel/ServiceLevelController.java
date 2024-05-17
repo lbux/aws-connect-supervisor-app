@@ -17,30 +17,22 @@ public class ServiceLevelController {
     private static final Logger logger = LoggerFactory.getLogger(ServiceLevelController.class);
 
     @GetMapping("/servicelevel")
-    public static Optional<Insights> serviceLevel(ConnectHandler handler, ConnectInstance instance) {
-        logger.info("/// SERVICE LEVEL ENDPOINT CALLED ///");
-
-        handler.sendRequestPopulateQueues(instance);
-
-        return getServiceLevelQueueInsights(handler, instance);
-    }
-
-    public static Optional<Insights> getServiceLevelQueueInsights(ConnectHandler handler, ConnectInstance instance) {
-        logger.info("/// GET SERVICE LEVEL FUNCTION CALLED ///");
+    public static Optional<Insights> getServiceLevelQueueInsights(ConnectHandler handler) {
+        logger.info("/// GET SERVICE LEVEL ENDPOINT CALLED ///");
 
         Insights serviceLevelInsightList = new Insights();
 
-        for (String queueId : instance.getQueues().keySet()) {
+        for (String queueId : handler.instance.getQueues().keySet()) {
             Optional<Double> SL15 = handler.sendRequestServiceLevel(queueId);
 
             if (SL15.isPresent()) {
                 Double SL15value = SL15.get();
-                String queueName = instance.getQueues().get(queueId);
+                String queueName = handler.instance.getQueues().get(queueId);
                 if (SL15value <= 40) {
                     Insight insight = new Insight(
                             SL15value,
                             "Service Level 15 for " + queueName + " has dropped below 40%",
-                            queueName + " (ID: "+ queueId +") Service Level 15 has dropped below 40%. " +
+                            queueName + " (ID: " + queueId + ") Service Level 15 has dropped below 40%. " +
                                     "SL 15 is the percentage of contacts answered within past 15 seconds). " +
                                     "Low answer rate indicates low efficiency " +
                                     "and could lead to increased customer dissatisfaction, increased abandon rates. " +

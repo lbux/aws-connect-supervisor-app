@@ -20,7 +20,7 @@ import java.util.Set;
 public class InsightsController {
     private static final Logger logger = LoggerFactory.getLogger(InsightsController.class);
 
-    public static ConnectInstance instance = new ConnectInstance();
+//    public static ConnectInstance instance = new ConnectInstance();
 
     @GetMapping("/insights")
     public Insights insights() {
@@ -29,20 +29,20 @@ public class InsightsController {
 
         ConnectHandler handler = new ConnectHandler();
 
-        handler.sendRequestPopulateQueues(instance);
+//        handler.sendRequestPopulateQueues(instance);
 
         logger.info("/// QUEUE STORE OUTPUT ///");
-        logger.info(instance.getQueues().toString());
+        logger.info(handler.instance.getQueues().toString());
 
         ArrayList<Insight> insightList = new ArrayList<>();
 
         // INSIGHT #1: queue's service level over 40%
-        ServiceLevelController.getServiceLevelQueueInsights(handler, instance)
+        ServiceLevelController.getServiceLevelQueueInsights(handler)
                 .map(Insights::insights)
                 .ifPresent(insightList::addAll);
 
         // INSIGHT #2: an agent's avg handling time is way over their queue level over 40%
-        AvgHandleTimeController.getAvgHandleTimeQueueInsights(handler, instance)
+        AvgHandleTimeController.getAvgHandleTimeQueueInsights(handler)
                 .map(Insights::insights)
                 .ifPresent(insightList::addAll);
 

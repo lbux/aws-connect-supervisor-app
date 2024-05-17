@@ -12,6 +12,14 @@ public class ConnectInstance {
         queues = new HashMap<>();
     }
 
+    public String getResourceArn() {
+        return resourceArn;
+    }
+
+    public String getInstanceId() {
+        return instanceId;
+    }
+
     public HashMap<String, String> getQueues() {
         return queues;
     }
