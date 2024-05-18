@@ -43,12 +43,24 @@ public class ConnectHandler {
         return getServiceLevel15(connectClient, queueId);
     }
 
-    public Optional<Double> sendRequestQueueAvgHandleTime(String queueId) {
-        return getQueueAvgHandleTime(connectClient, queueId);
+    public Optional<Double> sendRequestTestServiceLevel(String queueId) {
+        return getTestServiceLevel15(connectClient, queueId);
     }
 
-    public Optional<Double> sendRequestAgentAvgHandleTime(String queueId, String agentId) {
-        return getAgentInQueueAvgHandleTime(connectClient, queueId, agentId);
+    /**
+     * @param queueId can be null if agentId is provided
+     * @param agentId can be null if queueId is provided
+     */
+    public Optional<Double> sendRequestAvgHandleTime(String queueId, String agentId) {
+        return getAvgHandleTime(connectClient, queueId, agentId);
+    }
+
+    /**
+     * @param queueId can be null if agentId is provided
+     * @param agentId can be null if queueId is provided
+     */
+    public Optional<Double> sendRequestTestAvgHandleTime(String queueId, String agentId) {
+        return getTestAvgHandleTime(connectClient, queueId, agentId);
     }
 
     ///////// ^ END of Send Request Methods /////////
@@ -198,10 +210,49 @@ public class ConnectHandler {
                     .build();
             metrics.add(metric);
 
+            long currentEpochSecond = Instant.now().getEpochSecond();
+            long hourAgoEpochSecond = currentEpochSecond - (60 * 60);
+
+            GetMetricDataV2Request metricRequest = GetMetricDataV2Request.builder()
+                    .startTime(Instant.ofEpochSecond(hourAgoEpochSecond))
+                    .endTime(Instant.ofEpochSecond(currentEpochSecond))
+                    .metrics(metrics)
+                    .filters(getFilters(queueId, null))
+                    .resourceArn("arn:aws:connect:us-west-2:471112891051:instance/9198298a-bdc4-4f38-9156-76e99f4c84b0")
+                    .maxResults(10)
+                    .build();
+
+            GetMetricDataV2Response response = connectClient.getMetricDataV2(metricRequest);
+            if (!response.metricResults().isEmpty()) {
+                return Optional.of(response.metricResults().get(0).collections().get(0).value());
+            }
+
+        } catch (ConnectException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+        return Optional.empty();
+    }
+
+    public Optional<Double> getTestServiceLevel15(ConnectClient connectClient, String queueId) {
+        try {
+            List<ThresholdV2> thresholds = new ArrayList<>(1);
+            ThresholdV2 threshold = ThresholdV2.builder()
+                    .comparison("LT")
+                    .thresholdValue(15.0)
+                    .build();
+            thresholds.add(threshold);
+
+            List<MetricV2> metrics = new ArrayList<>(1);
+            MetricV2 metric = MetricV2.builder()
+                    .name("SERVICE_LEVEL")
+                    .threshold(thresholds)
+                    .build();
+            metrics.add(metric);
+
             GetMetricDataV2Request metricRequest = GetMetricDataV2Request.builder()
 //                    .startTime(Instant.ofEpochSecond(1715647396)) // for empty metric results
 //                    .endTime(Instant.ofEpochSecond(1715647467))
-                    .startTime(Instant.ofEpochSecond(1712359075)) // for present metric results
+                    .startTime(Instant.ofEpochSecond(1712359075)) // for metric results that exist
                     .endTime(Instant.ofEpochSecond(1712445432))
                     .metrics(metrics)
                     .filters(getFilters(queueId, null))
@@ -220,7 +271,7 @@ public class ConnectHandler {
         return Optional.empty();
     }
 
-    public Optional<Double> getQueueAvgHandleTime(ConnectClient connectClient, String queueId) {
+    public Optional<Double> getAvgHandleTime(ConnectClient connectClient, String queueId, String agentId) {
         try {
             List<MetricV2> metrics = new ArrayList<>(1);
             MetricV2 metric = MetricV2.builder()
@@ -228,11 +279,14 @@ public class ConnectHandler {
                     .build();
             metrics.add(metric);
 
+            long currentEpochSecond = Instant.now().getEpochSecond();
+            long hourAgoEpochSecond = currentEpochSecond - (60 * 60);
+
             GetMetricDataV2Request metricRequest = GetMetricDataV2Request.builder()
-                    .startTime(Instant.ofEpochSecond(1712356707))
-                    .endTime(Instant.ofEpochSecond(1712443492))
+                    .startTime(Instant.ofEpochSecond(hourAgoEpochSecond))
+                    .endTime(Instant.ofEpochSecond(currentEpochSecond))
                     .metrics(metrics)
-                    .filters(getFilters(queueId, null))
+                    .filters(getFilters(queueId, agentId))
                     .resourceArn(instance.getResourceArn())
                     .build();
 
@@ -247,7 +301,7 @@ public class ConnectHandler {
         return Optional.empty();
     }
 
-    public Optional<Double> getAgentInQueueAvgHandleTime(ConnectClient connectClient, String queueId, String agentId) {
+    public Optional<Double> getTestAvgHandleTime(ConnectClient connectClient, String queueId, String agentId) {
         try {
             List<MetricV2> metrics = new ArrayList<>(1);
             MetricV2 metric = MetricV2.builder()

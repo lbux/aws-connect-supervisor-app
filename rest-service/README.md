@@ -17,10 +17,7 @@
 - explore later: combine all metricdatav2 requests into one
 
 service level todo:
-
-- Change magic start and end epoch times to the last 30 seconds.
-- write real time sl function (don't replace existing)
-    - check if no calls and no answers means SL is 0 and gives insight (which it shouldn't)
+- 
 
 avg handling time todo:
 
