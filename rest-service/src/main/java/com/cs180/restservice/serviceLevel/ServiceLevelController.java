@@ -1,5 +1,6 @@
 package com.cs180.restservice.serviceLevel;
 
+import com.cs180.restservice.util.InsightType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +30,7 @@ public class ServiceLevelController {
                 String queueName = handler.instance.getQueues().get(queueId);
                 if (SL15value <= 40) {
                     Insight insight = new Insight(
+                            InsightType.SERVICE_LEVEL,
                             SL15value,
                             "Service Level 15 for " + queueName + " has dropped below 40%",
                             queueName + " (ID: " + queueId + ") Service Level 15 has dropped below 40%. " +
@@ -64,6 +66,7 @@ public class ServiceLevelController {
                 String queueName = handler.instance.getQueues().get(queueId);
                 if (SL15value <= 40) {
                     Insight insight = new Insight(
+                            InsightType.SERVICE_LEVEL,
                             SL15value,
                             "Service Level 15 for " + queueName + " has dropped below 40%",
                             queueName + " (ID: " + queueId + ") Service Level 15 has dropped below 40%. " +

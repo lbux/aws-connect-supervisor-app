@@ -1,5 +1,6 @@
 package com.cs180.restservice.avgHandleTime;
 
+import com.cs180.restservice.util.InsightType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,6 +28,7 @@ public class AvgHandleTimeController {
 
             if (queueAvgHandleTimeValue.isPresent() && queueAvgHandleTimeValue.get() > 60) {
                 Insight insight = new Insight(
+                        InsightType.AVG_HANDLE_TIME_QUEUE,
                         queueAvgHandleTimeValue.get(),
                         "Display Queue " + queueId + " Avg Handle Time",
                         "Queue " + queueId + " maps to Queue Name: " + handler.instance.getQueues().get(queueId),
@@ -40,6 +42,7 @@ public class AvgHandleTimeController {
 
                 if (agentAvgHandleTimeValue.isPresent() && agentAvgHandleTimeValue.get() > 60) {
                     Insight insight = new Insight(
+                            InsightType.AVG_HANDLE_TIME_AGENT,
                             agentAvgHandleTimeValue.get(),
                             "Display Agent " + agentId + " in " + handler.instance.getQueues().get(queueId) + " Avg Handle Time",
                             "Agent Details: " + handler.sendRequestAgentInfo(agentId),
@@ -68,6 +71,7 @@ public class AvgHandleTimeController {
 
             if (queueAvgHandleTimeValue.isPresent() && queueAvgHandleTimeValue.get() > 60) {
                 Insight insight = new Insight(
+                        InsightType.AVG_HANDLE_TIME_QUEUE,
                         queueAvgHandleTimeValue.get(),
                         "Display Queue " + queueId + " Avg Handle Time",
                         "Queue " + queueId + " maps to Queue Name: " + handler.instance.getQueues().get(queueId),
@@ -81,6 +85,7 @@ public class AvgHandleTimeController {
 
                 if (agentAvgHandleTimeValue.isPresent() && agentAvgHandleTimeValue.get() > 60) {
                     Insight insight = new Insight(
+                            InsightType.AVG_HANDLE_TIME_AGENT,
                             agentAvgHandleTimeValue.get(),
                             "Display Agent " + agentId + " in " + handler.instance.getQueues().get(queueId) + " Avg Handle Time",
                             "Agent Details: " + handler.sendRequestAgentInfo(agentId),
