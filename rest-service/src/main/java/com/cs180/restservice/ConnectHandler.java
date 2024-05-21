@@ -7,7 +7,6 @@ import software.amazon.awssdk.services.connect.model.*;
 
 import java.time.Instant;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class ConnectHandler {
@@ -229,7 +228,7 @@ public class ConnectHandler {
                     .startTime(Instant.ofEpochSecond(hourAgoEpochSecond))
                     .endTime(Instant.ofEpochSecond(currentEpochSecond))
                     .metrics(metrics)
-                    .filters(getFilters(queueId, null, null))
+                    .filters(getFilters(queueId, null))
                     .resourceArn("arn:aws:connect:us-west-2:471112891051:instance/9198298a-bdc4-4f38-9156-76e99f4c84b0")
                     .maxResults(10)
                     .build();
@@ -267,7 +266,7 @@ public class ConnectHandler {
                     .startTime(Instant.ofEpochSecond(1712359075)) // for metric results that exist
                     .endTime(Instant.ofEpochSecond(1712445432))
                     .metrics(metrics)
-                    .filters(getFilters(queueId, null, null))
+                    .filters(getFilters(queueId, null))
                     .resourceArn("arn:aws:connect:us-west-2:471112891051:instance/9198298a-bdc4-4f38-9156-76e99f4c84b0")
                     .maxResults(10)
                     .build();
@@ -298,7 +297,7 @@ public class ConnectHandler {
                     .startTime(Instant.ofEpochSecond(hourAgoEpochSecond))
                     .endTime(Instant.ofEpochSecond(currentEpochSecond))
                     .metrics(metrics)
-                    .filters(getFilters(queueId, agentId, null))
+                    .filters(getFilters(queueId, agentId))
                     .resourceArn(instance.getResourceArn())
                     .build();
 
@@ -325,7 +324,7 @@ public class ConnectHandler {
                     .startTime(Instant.ofEpochSecond(1712356707))
                     .endTime(Instant.ofEpochSecond(1712443492))
                     .metrics(metrics)
-                    .filters(getFilters(queueId, agentId, null))
+                    .filters(getFilters(queueId, agentId))
                     .resourceArn(instance.getResourceArn())
                     .build();
 
