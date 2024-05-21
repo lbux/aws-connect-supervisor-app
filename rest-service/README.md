@@ -8,6 +8,9 @@
 
 ### _TO-DO:_
 
+- End of day report
+- Historical insights
+- Service for best agents to recommend under action
 - maintaining the same insight (same insight id) even after refresh until resolved
     - could provide insight in how long it takes for certain types of insights to get resolved?
 - identifying which agents to reassign to a queue
