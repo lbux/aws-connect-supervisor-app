@@ -23,8 +23,3 @@ Access the application at this URL for JSON output: http://localhost:8080/insigh
 - The provided Maven commands are for running the application locally.
 - Ensure that you have Maven and Java 17 installed on your system.
 - Adjust the URL according to your local environment setup.
-
-## Todo
-- End of day report
-- Historical insights
-- Service for best agents to recommend under action
