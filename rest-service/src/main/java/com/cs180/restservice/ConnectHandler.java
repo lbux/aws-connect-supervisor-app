@@ -6,11 +6,8 @@ import software.amazon.awssdk.services.connect.ConnectClient;
 import software.amazon.awssdk.services.connect.model.*;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class ConnectHandler {
@@ -63,35 +60,50 @@ public class ConnectHandler {
         return getTestAvgHandleTime(connectClient, queueId, agentId);
     }
 
+    /**
+     * @param queueId can be null if agentId is provided
+     */
+    public Optional<Double> sendRequestQueueLoad(String queueId) {
+        return getQueueLoad(connectClient, queueId);
+    }
+
+    /**
+     * @param queueId can be null if agentId is provided
+     */
+    public Optional<Double> sendRequestAgentsStaffed(String queueId) {
+        return getAgentsStaffed(connectClient, queueId);
+    }
+
     ///////// ^ END of Send Request Methods /////////
 
-    public List<FilterV2> getFilters(String queueId, String agentId) {
+    private static List<FilterV2> getFilters(String queueId, String agentId) {
         List<FilterV2> filters = new ArrayList<>();
 
         if (queueId != null) {
-            FilterV2 filter1 = FilterV2.builder()
+            FilterV2 queueFilter = FilterV2.builder()
                     .filterKey("QUEUE")
                     .filterValues(List.of(queueId))
                     .build();
-            filters.add(filter1);
+            filters.add(queueFilter);
         }
 
         if (agentId != null) {
-            FilterV2 filter2 = FilterV2.builder()
+            FilterV2 agentFilter = FilterV2.builder()
                     .filterKey("AGENT")
                     .filterValues(List.of(agentId))
                     .build();
-            filters.add(filter2);
+            filters.add(agentFilter);
         }
+
         return filters;
     }
 
-    ///////// ^ END of Helper Methods /////////
+    ///////// END of Send Request Methods, START of Connect Methods /////////
 
     /*
     IMPORTANT: only call once at start up to reduce overhead
      */
-    public void listAndPopulateQueues(ConnectClient connectClient, ConnectInstance instance) {
+    private void listAndPopulateQueues(ConnectClient connectClient, ConnectInstance instance) {
         try {
             ListQueuesRequest queuesRequest = ListQueuesRequest.builder()
                     .instanceId(instance.getInstanceId())
@@ -113,7 +125,7 @@ public class ConnectHandler {
         }
     }
 
-    public List<String> listAllInstances(ConnectClient connectClient) {
+    private List<String> listAllInstances(ConnectClient connectClient) {
         try {
             ListInstancesRequest instancesRequest = ListInstancesRequest.builder()
                     .maxResults(10)
@@ -149,7 +161,7 @@ public class ConnectHandler {
         return output;
     }
 
-    public AgentInfo describeUser(ConnectClient connectClient, String userId) {
+    private AgentInfo describeUser(ConnectClient connectClient, String userId) {
         try {
             DescribeUserRequest userRequest = DescribeUserRequest.builder()
                     .instanceId(instance.getInstanceId())
@@ -171,7 +183,7 @@ public class ConnectHandler {
         return null;
     }
 
-    public Set<String> getCurrentUserData(ConnectClient connectClient, String queueId) {
+    private Set<String> getCurrentUserData(ConnectClient connectClient, String queueId) {
         try {
             UserDataFilters filters = UserDataFilters.builder()
                     .queues(Collections.singleton(queueId))
@@ -194,7 +206,7 @@ public class ConnectHandler {
         return null;
     }
 
-    public Optional<Double> getServiceLevel15(ConnectClient connectClient, String queueId) {
+    private Optional<Double> getServiceLevel15(ConnectClient connectClient, String queueId) {
         try {
             List<ThresholdV2> thresholds = new ArrayList<>(1);
             ThresholdV2 threshold = ThresholdV2.builder()
@@ -217,7 +229,7 @@ public class ConnectHandler {
                     .startTime(Instant.ofEpochSecond(hourAgoEpochSecond))
                     .endTime(Instant.ofEpochSecond(currentEpochSecond))
                     .metrics(metrics)
-                    .filters(getFilters(queueId, null))
+                    .filters(getFilters(queueId, null, null))
                     .resourceArn("arn:aws:connect:us-west-2:471112891051:instance/9198298a-bdc4-4f38-9156-76e99f4c84b0")
                     .maxResults(10)
                     .build();
@@ -233,7 +245,7 @@ public class ConnectHandler {
         return Optional.empty();
     }
 
-    public Optional<Double> getTestServiceLevel15(ConnectClient connectClient, String queueId) {
+    private Optional<Double> getTestServiceLevel15(ConnectClient connectClient, String queueId) {
         try {
             List<ThresholdV2> thresholds = new ArrayList<>(1);
             ThresholdV2 threshold = ThresholdV2.builder()
@@ -255,7 +267,7 @@ public class ConnectHandler {
                     .startTime(Instant.ofEpochSecond(1712359075)) // for metric results that exist
                     .endTime(Instant.ofEpochSecond(1712445432))
                     .metrics(metrics)
-                    .filters(getFilters(queueId, null))
+                    .filters(getFilters(queueId, null, null))
                     .resourceArn("arn:aws:connect:us-west-2:471112891051:instance/9198298a-bdc4-4f38-9156-76e99f4c84b0")
                     .maxResults(10)
                     .build();
@@ -271,7 +283,7 @@ public class ConnectHandler {
         return Optional.empty();
     }
 
-    public Optional<Double> getAvgHandleTime(ConnectClient connectClient, String queueId, String agentId) {
+    private Optional<Double> getAvgHandleTime(ConnectClient connectClient, String queueId, String agentId) {
         try {
             List<MetricV2> metrics = new ArrayList<>(1);
             MetricV2 metric = MetricV2.builder()
@@ -286,7 +298,7 @@ public class ConnectHandler {
                     .startTime(Instant.ofEpochSecond(hourAgoEpochSecond))
                     .endTime(Instant.ofEpochSecond(currentEpochSecond))
                     .metrics(metrics)
-                    .filters(getFilters(queueId, agentId))
+                    .filters(getFilters(queueId, agentId, null))
                     .resourceArn(instance.getResourceArn())
                     .build();
 
@@ -301,7 +313,7 @@ public class ConnectHandler {
         return Optional.empty();
     }
 
-    public Optional<Double> getTestAvgHandleTime(ConnectClient connectClient, String queueId, String agentId) {
+    private Optional<Double> getTestAvgHandleTime(ConnectClient connectClient, String queueId, String agentId) {
         try {
             List<MetricV2> metrics = new ArrayList<>(1);
             MetricV2 metric = MetricV2.builder()
@@ -313,11 +325,73 @@ public class ConnectHandler {
                     .startTime(Instant.ofEpochSecond(1712356707))
                     .endTime(Instant.ofEpochSecond(1712443492))
                     .metrics(metrics)
-                    .filters(getFilters(queueId, agentId))
+                    .filters(getFilters(queueId, agentId, null))
                     .resourceArn(instance.getResourceArn())
                     .build();
 
             GetMetricDataV2Response response = connectClient.getMetricDataV2(metricRequest);
+            if (!response.metricResults().isEmpty()) {
+                return Optional.of(response.metricResults().get(0).collections().get(0).value());
+            }
+
+        } catch (ConnectException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+        return Optional.empty();
+    }
+
+    private static Optional<Double> getQueueLoad(ConnectClient connectClient, String queueId) {
+        try {
+            CurrentMetric currentMetric = CurrentMetric.builder()
+                    .name("CONTACTS_IN_QUEUE")
+                    .unit("COUNT")
+                    .build();
+
+            Filters filters = Filters.builder()
+                    .channels(Channel.valueOf("CHAT"))
+                    .queues(List.of(queueId))
+                    .build();
+
+            GetCurrentMetricDataRequest metricRequest = GetCurrentMetricDataRequest.builder()
+                    .currentMetrics(currentMetric)
+                    .filters(filters)
+                    .groupings(Grouping.valueOf("QUEUE"))
+                    .maxResults(100)
+                    .build();
+
+            GetCurrentMetricDataResponse response = connectClient.getCurrentMetricData(metricRequest);
+
+            if (!response.metricResults().isEmpty()) {
+                return Optional.of(response.metricResults().get(0).collections().get(0).value());
+            }
+
+        } catch (ConnectException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+        return Optional.empty();
+    }
+
+    private static Optional<Double> getAgentsStaffed(ConnectClient connectClient, String queueId) {
+        try {
+            CurrentMetric currentMetric = CurrentMetric.builder()
+                    .name("AGENTS_STAFFED")
+                    .unit("COUNT")
+                    .build();
+
+            Filters filters = Filters.builder()
+                    .channels(Channel.valueOf("CHAT"))
+                    .queues(List.of(queueId))
+                    .build();
+
+            GetCurrentMetricDataRequest metricRequest = GetCurrentMetricDataRequest.builder()
+                    .currentMetrics(currentMetric)
+                    .filters(filters)
+                    .groupings(Grouping.valueOf("QUEUE"))
+                    .maxResults(100)
+                    .build();
+
+            GetCurrentMetricDataResponse response = connectClient.getCurrentMetricData(metricRequest);
+
             if (!response.metricResults().isEmpty()) {
                 return Optional.of(response.metricResults().get(0).collections().get(0).value());
             }
