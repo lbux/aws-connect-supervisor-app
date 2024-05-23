@@ -62,8 +62,8 @@ public class ConnectHandler {
     /**
      * @param queueId can be null if agentId is provided
      */
-    public Optional<Double> sendRequestQueueLoad(String queueId) {
-        return getQueueLoad(connectClient, queueId);
+    public Optional<Double> sendRequestContactsInQueue(String queueId) {
+        return getNumContactsInQueue(connectClient, queueId);
     }
 
     /**
@@ -339,7 +339,7 @@ public class ConnectHandler {
         return Optional.empty();
     }
 
-    private static Optional<Double> getQueueLoad(ConnectClient connectClient, String queueId) {
+    private Optional<Double> getNumContactsInQueue(ConnectClient connectClient, String queueId) {
         try {
             CurrentMetric currentMetric = CurrentMetric.builder()
                     .name("CONTACTS_IN_QUEUE")
@@ -352,6 +352,7 @@ public class ConnectHandler {
                     .build();
 
             GetCurrentMetricDataRequest metricRequest = GetCurrentMetricDataRequest.builder()
+                    .instanceId(instance.getInstanceId())
                     .currentMetrics(currentMetric)
                     .filters(filters)
                     .groupings(Grouping.valueOf("QUEUE"))
@@ -370,7 +371,7 @@ public class ConnectHandler {
         return Optional.empty();
     }
 
-    private static Optional<Double> getAgentsStaffed(ConnectClient connectClient, String queueId) {
+    private Optional<Double> getAgentsStaffed(ConnectClient connectClient, String queueId) {
         try {
             CurrentMetric currentMetric = CurrentMetric.builder()
                     .name("AGENTS_STAFFED")
@@ -383,6 +384,7 @@ public class ConnectHandler {
                     .build();
 
             GetCurrentMetricDataRequest metricRequest = GetCurrentMetricDataRequest.builder()
+                    .instanceId(instance.getInstanceId())
                     .currentMetrics(currentMetric)
                     .filters(filters)
                     .groupings(Grouping.valueOf("QUEUE"))

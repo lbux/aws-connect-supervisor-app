@@ -18,7 +18,7 @@ public class ServiceLevelController {
 
     @GetMapping("/servicelevel")
     public static Optional<Insights> getServiceLevelQueueInsights(ConnectHandler handler) {
-        logger.info("/// GET SERVICE LEVEL ENDPOINT CALLED ///");
+        logger.info("/// SERVICE LEVEL CONTROLLER CALLED ///");
 
         Insights serviceLevelInsightList = new Insights();
 
@@ -26,7 +26,7 @@ public class ServiceLevelController {
             Optional<Double> SL15 = handler.sendRequestServiceLevel(queueId);
 
             if (SL15.isPresent()) {
-                Double SL15value = SL15.get();
+                double SL15value = SL15.get();
                 String queueName = handler.instance.getQueues().get(queueId);
                 if (SL15value <= 40) {
                     Insight insight = new Insight(
@@ -62,7 +62,7 @@ public class ServiceLevelController {
             Optional<Double> SL15 = handler.sendRequestTestServiceLevel(queueId);
 
             if (SL15.isPresent()) {
-                Double SL15value = SL15.get();
+                double SL15value = SL15.get();
                 String queueName = handler.instance.getQueues().get(queueId);
                 if (SL15value <= 40) {
                     Insight insight = new Insight(
