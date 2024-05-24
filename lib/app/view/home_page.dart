@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,9 +29,40 @@ class _HomePageState extends State<HomePage> {
     'Agent Jack Smith in the Sales queue has received consistently low customer satisfaction scores over his last 20 interactions, with particular complaints about resolution effectiveness and tone of communication. A detailed review of his past call recordings and customer feedback should be conducted to identify specific areas of improvement. Coaching or mentoring sessions should be scheduled based on the insights gained from the review.',
   ];
 
+  void _showDetailSheet(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (context) {
+        final colorScheme = Theme.of(context).colorScheme;
+        return ColoredBox(
+          color: colorScheme.background,
+          child: Column(
+            children: [
+              Expanded(
+                child: InfoCard(
+                  content: inDepthRecommendations[selectedIndex],
+                  colorScheme: colorScheme,
+                ),
+              ),
+              Expanded(
+                child: InfoCard(
+                  isSvg: true,
+                  colorScheme: colorScheme,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+      isScrollControlled: true,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    ScreenUtil.init(context);
+
     return Scaffold(
       backgroundColor: colorScheme.background,
       appBar: AppBar(
@@ -47,10 +79,10 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Row(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth < 800) {
+            return SingleChildScrollView(
               child: Column(
                 children: List.generate(5, (index) {
                   return RecommendationCard(
@@ -60,33 +92,60 @@ class _HomePageState extends State<HomePage> {
                       setState(() {
                         selectedIndex = index;
                       });
+                      _showDetailSheet(context);
                     },
                     recommendation: recommendations[index],
                     colorScheme: colorScheme,
                   );
                 }),
               ),
-            ),
-          ),
-          Expanded(
-            child: Column(
+            );
+          } else {
+            return Row(
               children: [
                 Expanded(
-                  child: InfoCard(
-                    content: inDepthRecommendations[selectedIndex],
-                    colorScheme: colorScheme,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: List.generate(5, (index) {
+                        return RecommendationCard(
+                          index: index,
+                          isSelected: selectedIndex == index,
+                          onTap: () {
+                            setState(
+                              () {
+                                selectedIndex = index;
+                              },
+                            );
+                          },
+                          recommendation: recommendations[index],
+                          colorScheme: colorScheme,
+                        );
+                      }),
+                    ),
                   ),
                 ),
                 Expanded(
-                  child: InfoCard(
-                    isSvg: true,
-                    colorScheme: colorScheme,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: InfoCard(
+                          content: inDepthRecommendations[selectedIndex],
+                          colorScheme: colorScheme,
+                        ),
+                      ),
+                      Expanded(
+                        child: InfoCard(
+                          isSvg: true,
+                          colorScheme: colorScheme,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
-            ),
-          ),
-        ],
+            );
+          }
+        },
       ),
     );
   }
