@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: colorScheme.background,
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: const Text('Insights Board'),
         centerTitle: true,
         backgroundColor: colorScheme.secondary,
         actions: [
@@ -232,9 +232,9 @@ class InfoCard extends StatelessWidget {
               : AutoSizeText(
                   content,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 30),
+                  style: const TextStyle(fontSize: 40),
                   minFontSize: 8,
-                  maxLines: 8,
+                  maxLines: 15,
                   overflow: TextOverflow.ellipsis,
                 ),
         ),
