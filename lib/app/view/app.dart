@@ -9,18 +9,20 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     final myColorScheme = ColorScheme(
       brightness: Brightness.light,
-      primary: const Color(0xFF146EB4),
+      primary: const Color(0xFF052739), // Dark Blue
       onPrimary: Colors.white,
-      secondary: const Color(0xFFFF9900),
+      secondary: const Color(0xFFFE9F02), // Orange
       onSecondary: Colors.black,
       error: Colors.redAccent,
       onError: Colors.white,
-      background: const Color(0xFFF2F2F2),
+      background: const Color(0xFFF3F4F5), // Light Gray
       onBackground: Colors.black,
       surface: Colors.white,
       onSurface: Colors.black,
-      primaryContainer: const Color(0xFF146EB4).withOpacity(0.8),
-      secondaryContainer: const Color(0xFFFF9900).withOpacity(0.8),
+      primaryContainer:
+          const Color(0xFF052739).withOpacity(0.8), // Dark Blue with opacity
+      secondaryContainer:
+          const Color(0xFFFE9F02).withOpacity(0.8), // Orange with opacity
     );
     final themeData = ThemeData(
       colorScheme: myColorScheme,

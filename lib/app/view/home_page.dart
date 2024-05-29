@@ -1,7 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:aws_connect_supervisor_app/app/models/insight.dart';
+import 'package:aws_connect_supervisor_app/app/services/insight_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,41 +13,50 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
+  List<Insight> insights = [];
+  final InsightService _insightService = InsightService();
 
-  final List<String> recommendations = [
-    'Agent in Sales queue is struggling with slow response times. Additional training recommended.',
-    'Service level for Support queue is 5% below target. Consider taking action soon.',
-    'Agents in Support queue are idle. Recommend moving to Sales queue.',
-    'VIP queue experiencing an influx of calls. Recommend adding agents to the queue.',
-    'Agent in Sales consistently receives bad customer feedback. Review past interactions.',
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _loadInitialInsights();
+  }
 
-  final List<String> inDepthRecommendations = [
-    'Agent Tom Harper in the Sales queue has an average response time of 30 seconds, significantly higher than the team average of 18 seconds. This slow response has been consistent over the past two weeks. To address this, a tailored training session focusing on efficient call handling and quick response techniques is recommended. This will likely help Tom decrease his response times to align with the team average.',
-    'The current service level in the Support queue is at 75%, which is below our target of 80%. Analysis from the last 48 hours shows that the queue often struggles during the 10 AM to 12 PM window. To rectify this, consider scheduling additional agents during this peak period or reviewing current call handling procedures to enhance efficiency and meet the target service level.',
-    'Data from the past week indicates that agents in the Support queue, such as Emily Johnson and Mark Lee, have a low contact rate with more than 50% idle time during their shifts. Meanwhile, the Sales queue has been experiencing a high volume of calls with a contacts-to-agent ratio of 3:1. Shifting Emily and Mark to the Sales queue could better utilize their capacity and balance the workload across queues.',
-    'The VIP queue has seen a 40% increase in call volume this month, with average wait times increasing to 25 seconds per call. Adding agents, such as Sarah Connor from the General queue, where call volumes have decreased by 20%, to the VIP queue could help manage this influx effectively and maintain our standard of service excellence for VIP customers.',
-    'Agent Jack Smith in the Sales queue has received consistently low customer satisfaction scores over his last 20 interactions, with particular complaints about resolution effectiveness and tone of communication. A detailed review of his past call recordings and customer feedback should be conducted to identify specific areas of improvement. Coaching or mentoring sessions should be scheduled based on the insights gained from the review.',
-  ];
+  Future<void> _loadInitialInsights() async {
+    final loadedInsights = await _insightService.loadInsights();
+    setState(() {
+      insights = loadedInsights;
+    });
+  }
+
+  void _refreshInsights() {
+    setState(() {
+      insights = _insightService.refreshInsights();
+    });
+  }
 
   void _showDetailSheet(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
       builder: (context) {
         final colorScheme = Theme.of(context).colorScheme;
+        final selectedInsight = insights[selectedIndex];
         return ColoredBox(
           color: colorScheme.background,
           child: Column(
             children: [
               Expanded(
+                flex: 3,
                 child: InfoCard(
-                  content: inDepthRecommendations[selectedIndex],
+                  content: '''
+${selectedInsight.reason}
+\n${selectedInsight.action}''',
                   colorScheme: colorScheme,
                 ),
               ),
               Expanded(
                 child: InfoCard(
-                  isSvg: true,
+                  content: _formatMetadata(insights[selectedIndex].metadata),
                   colorScheme: colorScheme,
                 ),
               ),
@@ -56,6 +66,25 @@ class _HomePageState extends State<HomePage> {
       },
       isScrollControlled: true,
     );
+  }
+
+  String _formatMetadata(Map<String, dynamic> metadata) {
+    final queueId = metadata['QueueId'] as String? ?? 'N/A';
+    final agentId = metadata['AgentId'] as String?;
+    final bedrockSources = (metadata['BedrockSources'] as List)
+        .map((dynamic source) => source as Map<String, dynamic>)
+        .toList();
+    final sources = bedrockSources
+        .map((Map<String, dynamic> source) => source['SourceName'] as String)
+        .join(', ');
+
+    final buffer = StringBuffer()..writeln('QueueID: $queueId');
+    if (agentId != null) {
+      buffer.writeln('AgentID: $agentId');
+    }
+    buffer.writeln('Sources: $sources');
+
+    return buffer.toString();
   }
 
   @override
@@ -74,13 +103,16 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.all(8),
             child: IconButton(
               icon: const Icon(Icons.refresh),
-              onPressed: () {},
+              onPressed: _refreshInsights,
             ),
           ),
         ],
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
+          if (insights.isEmpty) {
+            return const Center(child: CircularProgressIndicator());
+          }
           if (constraints.maxWidth < 800) {
             return SingleChildScrollView(
               child: Column(
@@ -94,7 +126,8 @@ class _HomePageState extends State<HomePage> {
                       });
                       _showDetailSheet(context);
                     },
-                    recommendation: recommendations[index],
+                    recommendation: insights[index].insight,
+                    buttonLabel: insights[index].buttonLabel,
                     colorScheme: colorScheme,
                   );
                 }),
@@ -111,13 +144,12 @@ class _HomePageState extends State<HomePage> {
                           index: index,
                           isSelected: selectedIndex == index,
                           onTap: () {
-                            setState(
-                              () {
-                                selectedIndex = index;
-                              },
-                            );
+                            setState(() {
+                              selectedIndex = index;
+                            });
                           },
-                          recommendation: recommendations[index],
+                          recommendation: insights[index].insight,
+                          buttonLabel: insights[index].buttonLabel,
                           colorScheme: colorScheme,
                         );
                       }),
@@ -128,14 +160,18 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
                       Expanded(
+                        flex: 3,
                         child: InfoCard(
-                          content: inDepthRecommendations[selectedIndex],
+                          content: '''
+${insights[selectedIndex].reason}
+\n${insights[selectedIndex].action}''',
                           colorScheme: colorScheme,
                         ),
                       ),
                       Expanded(
                         child: InfoCard(
-                          isSvg: true,
+                          content:
+                              _formatMetadata(insights[selectedIndex].metadata),
                           colorScheme: colorScheme,
                         ),
                       ),
@@ -157,6 +193,7 @@ class RecommendationCard extends StatelessWidget {
     required this.isSelected,
     required this.onTap,
     required this.recommendation,
+    required this.buttonLabel,
     required this.colorScheme,
     super.key,
   });
@@ -165,6 +202,7 @@ class RecommendationCard extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
   final String recommendation;
+  final String buttonLabel;
   final ColorScheme colorScheme;
 
   @override
@@ -181,7 +219,10 @@ class RecommendationCard extends StatelessWidget {
                 title: AutoSizeText(
                   recommendation,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 24),
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: isSelected ? Colors.white : Colors.black,
+                  ),
                   minFontSize: 4,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
@@ -194,10 +235,10 @@ class RecommendationCard extends StatelessWidget {
                   onPressed: () {},
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
-                      colorScheme.secondaryContainer,
+                      colorScheme.secondary,
                     ),
                   ),
-                  child: Text((index.isEven) ? 'Agent' : 'Queue'),
+                  child: Text(buttonLabel),
                 ),
               ),
             ],
@@ -212,13 +253,11 @@ class InfoCard extends StatelessWidget {
   const InfoCard({
     required this.colorScheme,
     this.content = '',
-    this.isSvg = false,
     super.key,
   });
 
   final String content;
   final ColorScheme colorScheme;
-  final bool isSvg;
 
   @override
   Widget build(BuildContext context) {
@@ -227,16 +266,14 @@ class InfoCard extends StatelessWidget {
       child: Center(
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: isSvg
-              ? SvgPicture.asset('assets/temp.svg')
-              : AutoSizeText(
-                  content,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 40),
-                  minFontSize: 8,
-                  maxLines: 15,
-                  overflow: TextOverflow.ellipsis,
-                ),
+          child: AutoSizeText(
+            content,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 40, color: Colors.white),
+            minFontSize: 8,
+            maxLines: 15,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ),
     );

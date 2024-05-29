@@ -1,0 +1,163 @@
+{
+  "insights": [
+
+
+    {
+      "id": 1,
+      "insightType": {
+        "id": "1",
+        "name": "Queue"
+      },
+      "value": 0.39,
+      "insight": "Service Level 15 for Basic Queue has dropped below 40%",
+      "reason": "The drop in service level for the Basic Queue below 40% indicates that too many customers are waiting longer than the target time to have their calls answered. This can lead to increased customer frustration and potential call abandonment, negatively impacting the overall customer experience and the contact center's reputation.",
+      "action": "To improve the service level for the Basic Queue, I recommend that you ensure the contact center is adequately staffed during peak call times. This may involve adjusting agent schedules, cross-training agents to handle a wider range of call types, or implementing call-back options to manage long wait times more effectively.",
+      "metadata": {
+        "QueueId": "19dfef86-2020-46d3-b881-976564077825",
+        "BedrockSources": [
+          {
+            "SourceName": "AgentTrainingManual_Pt1.pdf",
+            "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "id": 2,
+      "insightType": {
+        "id": "1",
+        "name": "Queue"
+      },
+      "value": 420.03475,
+      "insight": "Sales queue's average handling time is 41 minutes, which is much higher than its monthly average of 25 minutes",
+      "reason": "Reducing average handling time (AHT) in the sales queue can help improve overall productivity and customer satisfaction. Long handle times can lead to increased queues and wait times, negatively impacting the service level and customer experience. Efficiently handling calls allows agents to assist more customers in a shorter period, enhancing the operational efficiency of the contact center.",
+      "action": "To reduce average handling time in the sales queue, I recommend that agents prioritize resolving customer issues quickly and effectively. This involves using call scripts and troubleshooting guides to streamline conversations, avoiding lengthy, off-topic discussions, and collaborating with teammates to manage high call volumes and redistribute calls to balance the workload.",
+      "metadata": {
+        "QueueId": "19dfef86-2020-46d3-b881-976564077825",
+        "BedrockSources": [
+          {
+            "SourceName": "AgentTrainingManual_Pt2.pdf",
+            "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+          },
+          {
+            "SourceName": "AgentTrainingManual_Pt1.pdf",
+            "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "insightType": {
+        "id": "2",
+        "name": "Agent"
+      },
+      "value": 1500.03475,
+      "insight": "Agent Tom's average handling time is 25 minutes, which is much higher than the Basic queue's average handling time of 7 minutes",
+      "reason": "Based on the search results, the key reason to reduce Agent Tom's average handling time in the sales queue is that long handle times can lead to increased queues and wait times, negatively impacting the service level and customer experience. Efficiently handling calls allows agents to assist more customers in a shorter period, enhancing the operational efficiency of the contact center and ensuring customers receive timely resolutions to their issues, contributing to higher satisfaction and loyalty.",
+      "action": "To improve Agent Tom's average handling time, it is recommended that he prioritize reducing wait times by regularly monitoring the queue to identify and address the oldest waiting contacts promptly. He should use call-back options if available to manage long wait times effectively and ensure that high-priority or escalated issues are resolved quickly. Additionally, maintaining a steady workflow and avoiding unnecessary delays during calls can help reduce the overall queue time.",
+      "metadata": {
+        "AgentId": "89d84d36-16fb-4799-95f2-e565e60f8f64",
+        "QueueId": "19dfef86-2020-46d3-b881-976564077825",
+        "BedrockSources": [
+          {
+            "SourceName": "AgentTrainingManual_Pt2.pdf",
+            "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+          }
+        ]
+      }
+    },
+        {
+            "id": 4,
+            "insightType": {
+                "id": "2",
+                "name": "Agent"
+            },
+            "value": -2.5,
+            "insight": "The past 5 contacts for agent David have shown a decline in average sentiment score.",
+            "reason": "The decline in average sentiment score for the past 5 contacts handled by agent Bob could indicate that he is struggling to provide a positive customer experience. This could be due to factors such as insufficient training, high stress levels, or difficulty in effectively resolving customer issues.",
+            "action": "To address this issue, I recommend that you provide additional coaching and training to agent Bob to help him improve his customer service skills and techniques for handling difficult conversations. You should also consider monitoring his workload and stress levels, and provide support or adjustments as needed to ensure he can maintain a positive attitude and deliver high-quality service.",
+            "metadata": {
+                "AgentId": "5161c8bf-1c9d-4a26-9339-6064b2cd75d3",
+                "QueueId": "19dfef86-2020-46d3-b881-976564077825",
+                "BedrockSources": [
+                    {
+                        "SourceName": "AgentTrainingManual_Pt1.pdf",
+                        "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/object/training-manual-bucket?region=us-west-2&bucketType=general&prefix=AgentTrainingManual_Pt1.pdf"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "insightType": {
+                "id": "2",
+                "name": "Agent"
+            },
+            "value": -4.3,
+            "insight": "The past 5 contacts for agent Neeraja have shown a decline in average sentiment score.",
+            "reason": "The decline in average sentiment score for the past 5 contacts handled by agent Bob could indicate that he is struggling to provide a positive customer experience. This could be due to factors such as insufficient training, high stress levels, or difficulty in effectively resolving customer issues",
+            "action": "To address this issue, I recommend that you provide additional coaching and training to agent Bob to help him improve his customer service skills and techniques for handling difficult conversations. You should also consider monitoring his workload and stress levels, and provide support or adjustments as needed to ensure he can maintain a positive attitude and deliver high-quality service.",
+            "metadata": {
+                "AgentId": "53a89caa-3e17-4f44-bf59-3095d8538892",
+                "QueueId": "19dfef86-2020-46d3-b881-976564077825",
+                "BedrockSources": [
+                    {
+                        "SourceName": "AgentTrainingManual_Pt1.pdf",
+                        "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "insightType": {
+                "id": "2",
+                "name": "Agent"
+            },
+            "value": -3.1,
+            "insight": "The past 5 contacts for agent Jessica have shown a decline in average sentiment score.",
+            "reason": "The decline in average sentiment score for the past 5 contacts handled by agent Bob could indicate that he is struggling to provide a positive customer experience. This could be due to factors such as insufficient training, high stress levels, or difficulty in effectively resolving customer issues.",
+            "action": "To address this issue, I recommend that you provide additional coaching and training to agent Bob to help him improve his customer service skills and techniques for handling difficult conversations. You should also consider monitoring his workload and stress levels, and provide support or adjustments as needed to ensure he can maintain a positive attitude and deliver high-quality service.",
+            "metadata": {
+                "AgentId": "16c8e85d-84da-43c5-8944-a30e4bee209f",
+                "QueueId": "19dfef86-2020-46d3-b881-976564077825",
+                "BedrockSources": [
+                    {
+                        "SourceName": "AgentTrainingManual_Pt1.pdf",
+                        "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+                    }
+                ]
+            }
+        },
+	
+ {
+            "id": 7,
+            "insightType": {
+                "id": "1",
+                "name": "Queue"
+            },
+            "value": -3.1,
+            "insight": "The queue response time is 3 minutes which is longer than normal.",
+            "reason": "The longer queue response time of 3 minutes indicates that there is a problem with the efficiency of the contact center's operations. This could be due to several factors, such as insufficient staffing, inefficient call-handling processes, or high call volumes during peak periods.",
+            "action": "I recommend that you take the following action to address the longer queue response time: Ensure that you have the appropriate number of agents staffed and available to handle incoming calls, especially during peak periods. Agents should be adhering to their schedules, returning from breaks promptly, and being flexible with shift changes to maintain adequate coverage.",
+            "metadata": {
+                "AgentId": "16c8e85d-84da-43c5-8944-a30e4bee209f",
+                "QueueId": "19dfef86-2020-46d3-b881-976564077825",
+                "BedrockSources": [
+                    {
+                        "SourceName": "AgentTrainingManual_Pt1.pdf",
+                        "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/object/training-manual-bucket?region=us-west-2&bucketType=general&prefix=AgentTrainingManual_Pt1.pdf"
+                    }
+                ]
+            }
+        }
+
+ 
+  ]
+}
+
+
