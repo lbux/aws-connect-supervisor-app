@@ -28,7 +28,7 @@
       },
       "value": 3,
       "insight": "VIP Line is overloaded with excessive number of contacts waiting",
-      "reason": "The search results indicate that reducing the average queue answer time is key to decreasing wait times on the VIP customer service line. Long answer times can lead to increased customer frustration and potential call abandonment, negatively affecting the overall customer experience. By consistently answering calls quickly, you can contribute to a more efficient and effective contact center operation, improving both service levels and customer perceptions of your responsiveness and reliability.",
+      "reason": "Reducing the average queue answer time is key to decreasing wait times on the VIP customer service line. Long answer times can lead to increased customer frustration and potential call abandonment, negatively affecting the overall customer experience. By consistently answering calls quickly, you can contribute to a more efficient and effective contact center operation, improving both service levels and customer perceptions of your responsiveness and reliability.",
       "action": "To reduce wait times on the VIP customer service line, I recommend that you: 1. Stay focused and minimize distractions at your workstation. 2. Familiarize yourself with the call system and its features to expedite call resolution.",
       "metadata": {
         "QueueId": "9a36c43d-0b79-436e-b9f4-ceeb7753026e",
@@ -72,7 +72,7 @@
       },
       "value": 2460.8,
       "insight": "Support queue's average handling time is 41 minutes, which is much higher than last month's average of 25 minutes",
-      "reason": "The search results indicate that having a high average queue answer time can be a problem, as it leads to increased customer frustration and potential call abandonment, negatively affecting the overall customer experience. The reason for this is that long answer times can delay prompt assistance to customers, reducing their satisfaction and trust in the service.",
+      "reason": "Having a high average queue answer time can be a problem, as it leads to increased customer frustration and potential call abandonment, negatively affecting the overall customer experience. Long answer times can delay prompt assistance to customers, reducing their satisfaction and trust in the service.",
       "action": "To address a high average queue answer time, I recommend that the agents: 1. Stay focused and minimize distractions at their workstations. 2. Familiarize themselves with the call system and its features to expedite call resolution. 3. Streamline their call-handling process by following established protocols and using available tools.",
       "metadata": {
         "QueueId": "60dd11a8-099b-4ca8-9886-2d0e1342393a",
@@ -92,7 +92,7 @@
       },
       "value": 1500.03475,
       "insight": "Agent David’s average handling time is 25 minutes, which is much higher than the Basic queue's average handling time of 7 minutes",
-      "reason": "The search results indicate that to reduce average handling time for agent David, the key is to focus on resolving customer issues more efficiently without compromising service quality.",
+      "reason": "To reduce average handling time for agent David, the key is to focus on resolving customer issues more efficiently without compromising service quality.",
       "action": "This involves being concise and focused during calls, following call resolution scripts and guidelines, and completing after-call work efficiently. Quickly identifying the customer's issue and using available resources and tools to expedite problem resolution can also help reduce handle time.",
       "metadata": {
         "AgentId": "5161c8bf-1c9d-4a26-9339-6064b2cd75d3",
@@ -181,7 +181,7 @@
       },
       "value": 1620.1,
       "insight": "The Sales queue response time is 27 minutes, which is longer than normal",
-      "reason": "The search results indicate that the sales queue is experiencing longer than normal response times. This could be due to agents taking too long to respond to customer inquiries, leading to increased wait times and potential customer frustration.",
+      "reason": "The sales queue is experiencing longer than normal response times. This could be due to agents taking too long to respond to customer inquiries, leading to increased wait times and potential customer frustration.",
       "action": "As the supervisor, I recommend the following actions to address the longer than normal sales queue response times: 1. Encourage agents to focus on resolving customer issues effectively and quickly, using call scripts and troubleshooting guides to streamline conversations. 2. Collaborate with the sales team to manage high call volumes, share best practices, and possibly redistribute calls to balance the workload.",
       "metadata": {
         "QueueId": "78da3914-1bcc-4618-bf43-b70dc81f3578",
@@ -318,7 +318,7 @@
       },
       "value": -2,
       "insight": "The past 5 contacts for agent Xiling have shown a decline in average sentiment score",
-      "reason": "The search results indicate that agent Xiling may be experiencing a decline in their average sentiment score. This could be due to a pattern of interactions that start positively but end negatively. The reason for this decline could be that the agent is not effectively engaging with customers in an empathetic manner or is not consistently applying successful strategies to maintain positive sentiment throughout the interaction.",
+      "reason": "Agent Xiling may be experiencing a decline in their average sentiment score. This could be due to a pattern of interactions that start positively but end negatively. The reason for this decline could be that the agent is not effectively engaging with customers in an empathetic manner or is not consistently applying successful strategies to maintain positive sentiment throughout the interaction.",
       "action": "To address this issue, I would recommend that agent Xiling: 1. Monitor trends in their sentiment scores and analyze what might be causing the negative shift in interactions. 2. Identify the techniques and approaches that led to positive outcomes in past interactions and consistently apply those strategies.",
       "metadata": {
         "AgentId": "76f4f77a-aa1a-4d98-b802-cd236365ab57",
@@ -363,7 +363,7 @@
       },
       "value": 3,
       "insight": "VIP Line is overloaded with excessive number of contacts waiting",
-      "reason": "The search results indicate that reducing the average queue answer time is key to decreasing wait times on the VIP customer service line. Long answer times can lead to increased customer frustration and potential call abandonment, negatively affecting the overall customer experience. By consistently answering calls quickly, you can contribute to a more efficient and effective contact center operation, improving both service levels and customer perceptions of your responsiveness and reliability.",
+      "reason": "Reducing the average queue answer time is key to decreasing wait times on the VIP customer service line. Long answer times can lead to increased customer frustration and potential call abandonment, negatively affecting the overall customer experience. By consistently answering calls quickly, you can contribute to a more efficient and effective contact center operation, improving both service levels and customer perceptions of your responsiveness and reliability.",
       "action": "To reduce wait times on the VIP customer service line, I recommend that you: 1. Stay focused and minimize distractions at your workstation. 2. Familiarize yourself with the call system and its features to expedite call resolution.",
       "metadata": {
         "QueueId": "9a36c43d-0b79-436e-b9f4-ceeb7753026e",
@@ -383,7 +383,7 @@
       },
       "value": 2460.8,
       "insight": "Support queue's average handling time is 41 minutes, which is much higher than last month's average of 25 minutes",
-      "reason": "The search results indicate that having a high average queue answer time can be a problem, as it leads to increased customer frustration and potential call abandonment, negatively affecting the overall customer experience. The reason for this is that long answer times can delay prompt assistance to customers, reducing their satisfaction and trust in the service.",
+      "reason": "Having a high average queue answer time can be a problem, as it leads to increased customer frustration and potential call abandonment, negatively affecting the overall customer experience. Long answer times can delay prompt assistance to customers, reducing their satisfaction and trust in the service.",
       "action": "To address a high average queue answer time, I recommend that the agents: 1. Stay focused and minimize distractions at their workstations. 2. Familiarize themselves with the call system and its features to expedite call resolution. 3. Streamline their call-handling process by following established protocols and using available tools.",
       "metadata": {
         "QueueId": "60dd11a8-099b-4ca8-9886-2d0e1342393a",
@@ -403,7 +403,7 @@
       },
       "value": -4,
       "insight": "The past 5 contacts for agent David have shown a decline in average sentiment score",
-      "reason": "Based on the search results, it appears that agent David is underperforming in terms of sentiment scores. The reason for this could be that his interactions with customers start positively but end negatively, indicating he may not be engaging empathetically or addressing customer concerns effectively.",
+      "reason": "It appears that agent David is underperforming in terms of sentiment scores. The reason for this could be that his interactions with customers start positively but end negatively, indicating he may not be engaging empathetically or addressing customer concerns effectively.",
       "action": "To improve agent David's average sentiment score, I recommend the following actions: 1. Monitor trends in his interactions and identify patterns where the sentiment shifts from positive to negative. 2. Analyze successful interactions where the sentiment shifted from negative to positive, and have him consistently apply the techniques and approaches that led to those positive outcomes.",
       "metadata": {
         "AgentId": "5161c8bf-1c9d-4a26-9339-6064b2cd75d3",
@@ -424,7 +424,7 @@
       },
       "value": 2580.36273,
       "insight": "Agent Xiling’s average handling time is 43 minutes, which is much higher than the Support queue's average handling time of 15 minutes",
-      "reason": "The search results indicate that reducing the average handling time (AHT) of agents can improve customer satisfaction and the overall efficiency of the contact center. The key reason is that shorter AHT ensures customers are assisted promptly, which enhances their experience and reduces frustration from long wait times.",
+      "reason": "Reducing the average handling time (AHT) of agents can improve customer satisfaction and the overall efficiency of the contact center. Shorter AHT ensures customers are assisted promptly, which enhances their experience and reduces frustration from long wait times.",
       "action": "To help agent Xiling reduce their AHT, I recommend the following actions: 1. Monitor and provide feedback on their average response time during interactions to identify areas for improvement. 2. Provide training on effective multitasking and responsiveness techniques to help them handle calls more efficiently.",
       "metadata": {
         "AgentId": "5161c8bf-1c9d-4a26-9339-6064b2cd75d3",
@@ -449,7 +449,7 @@
       },
       "value": 0.381,
       "insight": "Service Level 15 for VIP Queue has dropped below 40%",
-      "reason": "To improve the service level for the VIP queue, the key is to ensure adequate staffing to handle the incoming call volume. The search results indicate that having the appropriate number of agents staffed is crucial for maintaining service levels and reducing wait times.",
+      "reason": "To improve the service level for the VIP queue, the key is to ensure adequate staffing to handle the incoming call volume. Having the appropriate number of agents staffed is crucial for maintaining service levels and reducing wait times.",
       "action": "If the VIP queue is experiencing long wait times, it is recommended to: 1. Ensure agents are logged in and available to take calls as scheduled, adhering to shift schedules and promptly returning from breaks. 2. Communicate any schedule changes or personal issues promptly to the supervisor to avoid unexpected understaffing.",
       "metadata": {
         "QueueId": "9a36c43d-0b79-436e-b9f4-ceeb7753026e",
@@ -493,7 +493,7 @@
       },
       "value": -4,
       "insight": "The past 5 contacts for agent David have shown a decline in average sentiment score",
-      "reason": "Based on the search results, it appears that agent David is underperforming in terms of sentiment scores. The reason for this could be that his interactions with customers start positively but end negatively, indicating he may not be engaging empathetically or addressing customer concerns effectively.",
+      "reason": "It appears that agent David is underperforming in terms of sentiment scores. The reason for this could be that his interactions with customers start positively but end negatively, indicating he may not be engaging empathetically or addressing customer concerns effectively.",
       "action": "To improve agent David's average sentiment score, I recommend the following actions: 1. Monitor trends in his interactions and identify patterns where the sentiment shifts from positive to negative. 2. Analyze successful interactions where the sentiment shifted from negative to positive, and have him consistently apply the techniques and approaches that led to those positive outcomes.",
       "metadata": {
         "AgentId": "5161c8bf-1c9d-4a26-9339-6064b2cd75d3",
@@ -514,7 +514,7 @@
       },
       "value": 2580.36273,
       "insight": "Agent Xiling’s average handling time is 43 minutes, which is much higher than the Support queue's average handling time of 15 minutes",
-      "reason": "The search results indicate that reducing the average handling time (AHT) of agents can improve customer satisfaction and the overall efficiency of the contact center. The key reason is that shorter AHT ensures customers are assisted promptly, which enhances their experience and reduces frustration from long wait times.",
+      "reason": "Reducing the average handling time (AHT) of agents can improve customer satisfaction and the overall efficiency of the contact center. Shorter AHT ensures customers are assisted promptly, which enhances their experience and reduces frustration from long wait times.",
       "action": "To help agent Xiling reduce their AHT, I recommend the following actions: 1. Monitor and provide feedback on their average response time during interactions to identify areas for improvement. 2. Provide training on effective multitasking and responsiveness techniques to help them handle calls more efficiently.",
       "metadata": {
         "AgentId": "5161c8bf-1c9d-4a26-9339-6064b2cd75d3",
