@@ -15,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
   List<Insight> insights = [];
   final InsightService _insightService = InsightService();
+  final AutoSizeGroup infoCardGroup = AutoSizeGroup();
 
   @override
   void initState() {
@@ -52,12 +53,14 @@ class _HomePageState extends State<HomePage> {
 ${selectedInsight.reason}
 \n${selectedInsight.action}''',
                   colorScheme: colorScheme,
+                  group: infoCardGroup,
                 ),
               ),
               Expanded(
                 child: InfoCard(
                   content: _formatMetadata(insights[selectedIndex].metadata),
                   colorScheme: colorScheme,
+                  group: infoCardGroup,
                 ),
               ),
             ],
@@ -166,6 +169,7 @@ ${selectedInsight.reason}
 ${insights[selectedIndex].reason}
 \n${insights[selectedIndex].action}''',
                           colorScheme: colorScheme,
+                          group: infoCardGroup,
                         ),
                       ),
                       Expanded(
@@ -173,6 +177,7 @@ ${insights[selectedIndex].reason}
                           content:
                               _formatMetadata(insights[selectedIndex].metadata),
                           colorScheme: colorScheme,
+                          group: infoCardGroup,
                         ),
                       ),
                     ],
@@ -252,12 +257,14 @@ class RecommendationCard extends StatelessWidget {
 class InfoCard extends StatelessWidget {
   const InfoCard({
     required this.colorScheme,
+    required this.group,
     this.content = '',
     super.key,
   });
 
   final String content;
   final ColorScheme colorScheme;
+  final AutoSizeGroup group;
 
   @override
   Widget build(BuildContext context) {
@@ -268,10 +275,11 @@ class InfoCard extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: AutoSizeText(
             content,
+            group: group,
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 40, color: Colors.white),
             minFontSize: 8,
-            maxLines: 15,
+            maxLines: 25,
             overflow: TextOverflow.ellipsis,
           ),
         ),
