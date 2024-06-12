@@ -1,5 +1,6 @@
 package com.cs180.restservice.controllers;
 
+import com.cs180.restservice.queueLoad.QueueLoadController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,6 +36,11 @@ public class InsightsController {
         // INSIGHT #2: a queue or an agent's avg handling time is over 60 seconds
         // fix and change into: an agent's avg handling time is way over their queue level over 40%
         AvgHandleTimeController.getAvgHandleTimeQueueInsights(handler)
+                .map(Insights::insights)
+                .ifPresent(insightList::addAll);
+
+        // INSIGHT #3: a queue's load (contacts waiting to agents available) ratio is greater than 2
+        QueueLoadController.getQueueLoadInsight(handler)
                 .map(Insights::insights)
                 .ifPresent(insightList::addAll);
 

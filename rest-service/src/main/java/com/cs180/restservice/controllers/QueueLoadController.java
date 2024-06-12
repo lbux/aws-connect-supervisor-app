@@ -36,7 +36,7 @@ public class QueueLoadController {
                             queueName + " is overloaded with excessive number of contacts waiting",
                             queueName + " (ID: " + queueId + ") Queue Load is the ratio of contacts in queue to agents staffed. " +
                                     "A high queue load indicates that the ratio of contacts waiting for an agent to respond " +
-                                    "is double the number of agents currently available. " +
+                                    "to the number of agents currently available exceeds 2. " +
                                     "This implies a high contact volume and may lead to increased customer dissatisfaction and increased abandon rates. " +
                                     "Current agents may also experience difficulties with increased contact volume.",
                             "To improve queue load, consider optimizing staffing level by assigning more available agents to " + queueName + "."
