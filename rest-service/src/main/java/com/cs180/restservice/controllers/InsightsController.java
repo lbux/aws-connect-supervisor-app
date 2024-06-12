@@ -1,6 +1,5 @@
 package com.cs180.restservice.controllers;
 
-import com.cs180.restservice.queueLoad.QueueLoadController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
