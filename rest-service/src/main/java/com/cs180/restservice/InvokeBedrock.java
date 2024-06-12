@@ -14,6 +14,10 @@ import software.amazon.awssdk.services.bedrockruntime.model.InvokeModelResponse;
 // find retrieve and generate
 public class InvokeBedrock {
     public static void main(String[] args) {
+//        runBedrockClient();
+    }
+
+    private static void runBedrockClient() {
         BedrockRuntimeClient runtime = BedrockRuntimeClient.builder()
                 .region(Region.US_WEST_2)
                 .build();

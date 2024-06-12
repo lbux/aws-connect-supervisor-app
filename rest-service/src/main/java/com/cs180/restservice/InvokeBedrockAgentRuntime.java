@@ -13,6 +13,10 @@ import java.nio.charset.StandardCharsets;
 // find retrieve and generate
 public class InvokeBedrockAgentRuntime {
     public static void main(String[] args) {
+//        runBedrockClient();
+    }
+
+    private static void runBedrockClient() {
         BedrockRuntimeClient runtime = BedrockRuntimeClient.builder()
                 .region(Region.US_WEST_2)
                 .build();
