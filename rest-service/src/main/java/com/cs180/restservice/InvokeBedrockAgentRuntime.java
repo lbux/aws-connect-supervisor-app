@@ -1,18 +1,17 @@
 package com.cs180.restservice;
 
-import java.nio.charset.StandardCharsets;
-
 import org.json.JSONObject;
-
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClient;
 import software.amazon.awssdk.services.bedrockruntime.model.InvokeModelRequest;
 import software.amazon.awssdk.services.bedrockruntime.model.InvokeModelResponse;
 
+import java.nio.charset.StandardCharsets;
+
 // IMPORTANT NOTE: use minimally and track charges on aws console
 // find retrieve and generate
-public class InvokeBedrock {
+public class InvokeBedrockAgentRuntime {
     public static void main(String[] args) {
         BedrockRuntimeClient runtime = BedrockRuntimeClient.builder()
                 .region(Region.US_WEST_2)
