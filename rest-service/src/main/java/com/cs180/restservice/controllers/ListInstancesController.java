@@ -1,4 +1,4 @@
-package com.cs180.restservice.listInstances;
+package com.cs180.restservice.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

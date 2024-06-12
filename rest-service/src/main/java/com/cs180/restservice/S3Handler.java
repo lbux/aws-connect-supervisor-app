@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.Bucket;
-import software.amazon.awssdk.services.s3.model.GetObjectRequest;
-import software.amazon.awssdk.services.s3.model.ListBucketsResponse;
-import software.amazon.awssdk.services.s3.model.S3Exception;
+import software.amazon.awssdk.services.s3.model.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -55,7 +52,7 @@ public class S3Handler {
                     .key(key)
                     .build();
 
-            ResponseInputStream<?> response = s3Client.getObject(getObjectRequest);
+            ResponseInputStream<GetObjectResponse> response = s3Client.getObject(getObjectRequest);
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(response);
 
@@ -89,7 +86,7 @@ public class S3Handler {
                     .key(key)
                     .build();
 
-            ResponseInputStream<?> response = s3Client.getObject(getObjectRequest);
+            ResponseInputStream<GetObjectResponse> response = s3Client.getObject(getObjectRequest);
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(response);
 

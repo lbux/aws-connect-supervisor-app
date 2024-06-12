@@ -1,11 +1,9 @@
-package com.cs180.restservice.insights;
+package com.cs180.restservice.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.cs180.restservice.ConnectHandler;
-import com.cs180.restservice.avgHandleTime.AvgHandleTimeController;
-import com.cs180.restservice.serviceLevel.ServiceLevelController;
 import com.cs180.restservice.util.Insight;
 import com.cs180.restservice.util.Insights;
 import org.springframework.web.bind.annotation.GetMapping;

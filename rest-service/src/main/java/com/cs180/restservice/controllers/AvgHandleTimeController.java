@@ -1,4 +1,4 @@
-package com.cs180.restservice.avgHandleTime;
+package com.cs180.restservice.controllers;
 
 import com.cs180.restservice.util.InsightType;
 import org.slf4j.Logger;
