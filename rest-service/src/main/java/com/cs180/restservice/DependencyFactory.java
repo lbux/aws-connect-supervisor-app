@@ -18,6 +18,7 @@ public class DependencyFactory {
     public static ConnectClient connectClient() {
         return ConnectClient.builder()
                 .httpClientBuilder(ApacheHttpClient.builder())
+                .credentialsProvider(ProfileCredentialsProvider.create("AdministratorAccess-471112891051"))
                 .build();
     }
 

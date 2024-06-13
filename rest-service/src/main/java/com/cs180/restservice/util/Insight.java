@@ -7,15 +7,16 @@ public record Insight(long id,
                       Double value,
                       String insight,
                       String reason,
-                      String action) {
+                      String action,
+                      Metadata metadata) {
 
     private static final AtomicLong counter = new AtomicLong();
 
-    public Insight(InsightType insightType, Double value, String insight, String reason, String action) {
-        this(counter.incrementAndGet(), insightType, value, insight, reason, action);
+    public Insight(InsightType insightType, Double value, String insight, String reason, String action, Metadata metadata) {
+        this(counter.incrementAndGet(), insightType, value, insight, reason, action, metadata);
     }
 
     public Insight() {
-        this(counter.incrementAndGet(), null, null, null, null, null);
+        this(counter.incrementAndGet(), null, null, null, null, null, null);
     }
 }

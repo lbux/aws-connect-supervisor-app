@@ -1,11 +1,10 @@
 package com.cs180.restservice.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.cs180.restservice.ConnectHandler;
-import com.cs180.restservice.util.Insight;
-import com.cs180.restservice.util.InsightType;
-import com.cs180.restservice.util.Insights;
+import com.cs180.restservice.util.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,19 +26,16 @@ public class QueueLoadController {
             Optional<Double> agentsStaffed = handler.sendRequestAgentsStaffed(queueId);
 
             if (contactsInQueue.isPresent() && agentsStaffed.isPresent()) {
-                double queueLoad = contactsInQueue.get()/agentsStaffed.get();
+                double queueLoad = contactsInQueue.get() / agentsStaffed.get();
                 String queueName = handler.instance.getQueues().get(queueId);
                 if (queueLoad > 2) {
                     Insight insight = new Insight(
                             InsightType.QUEUE_LOAD,
                             queueLoad,
-                            queueName + " is overloaded with excessive number of contacts waiting",
-                            queueName + " (ID: " + queueId + ") Queue Load is the ratio of contacts in queue to agents staffed. " +
-                                    "A high queue load indicates that the ratio of contacts waiting for an agent to respond " +
-                                    "to the number of agents currently available exceeds 2. " +
-                                    "This implies a high contact volume and may lead to increased customer dissatisfaction and increased abandon rates. " +
-                                    "Current agents may also experience difficulties with increased contact volume.",
-                            "To improve queue load, consider optimizing staffing level by assigning more available agents to " + queueName + "."
+                            queueName + " queue is overloaded with excessive number of contacts waiting",
+                            "The high contact to agent ratio (" + contactsInQueue.get() + " / " + agentsStaffed.get() + ") in the " + queueName + " queue indicates that there are too many contacts waiting to be served by the available agents. This can lead to long wait times, which can frustrate customers and increase the likelihood of call abandonment, negatively impacting customer satisfaction and sales.",
+                            "To reduce wait times in the " + queueName + " queue, I recommend: 1. Increase the number of agents available to handle the incoming calls. This can be done by ensuring agents are logged in and available during their scheduled shifts, and by being flexible with shift changes to accommodate peak demand periods. 2. Streamline the call-handling process by providing agents with effective call scripts, troubleshooting guides, and other tools to help them resolve customer issues quickly and efficiently, reducing the time spent on each call.",
+                            new Metadata(queueId, null, List.of(BedrockSource.TRAINING_PT1, BedrockSource.TRAINING_PT2))
                     );
 
                     queueLoadInsightList.insights().add(insight);

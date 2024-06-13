@@ -43,6 +43,11 @@ public class InsightsController {
                 .map(Insights::insights)
                 .ifPresent(insightList::addAll);
 
+        // INSIGHT #4: a queue's current answer time is longer than historical average
+        QueueLoadController.getQueueLoadInsight(handler)
+                .map(Insights::insights)
+                .ifPresent(insightList::addAll);
+
         return new Insights(insightList);
     }
 }
