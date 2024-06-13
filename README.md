@@ -18,8 +18,8 @@ Before running the project, make sure you have the following installed:
 1. **Clone the repository:**
 
     ```sh
-    git clone <your-repo-url>
-    cd aws_connect_supervisor_app
+    git clone https://github.com/lbux/aws-connect-supervisor-app
+    cd aws-connect-supervisor-app
     ```
 
 2. **Install dependencies:**
