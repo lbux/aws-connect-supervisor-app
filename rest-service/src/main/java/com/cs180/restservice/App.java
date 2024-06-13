@@ -18,17 +18,17 @@ public class App {
 
 
         S3Handler handler = new S3Handler();
-        handler.listBuckets();
+        handler.sendRequestListBuckets();
 
         System.out.println();
 
         String queueId = "19dfef86-2020-46d3-b881-976564077825";
-        handler.getAvgQueueAnswerTimeThreshold(queueId);
+        handler.sendRequestAvgQueueAnswerTimeThreshold(queueId);
 
         System.out.println();
 
         String agentId = "89d84d36-16fb-4799-95f2-e565e60f8f64";
-        handler.getAgentRecentSentimentScore(agentId);
+        handler.sendRequestAgentRecentSentimentScore(agentId);
 
         logger.info("Application ends");
     }

@@ -67,10 +67,17 @@ public class ConnectHandler {
     }
 
     /**
-     * @param queueId can be null if agentId is provided
+     * @param queueId cannot be null
      */
     public Optional<Double> sendRequestAgentsStaffed(String queueId) {
         return getAgentsStaffed(connectClient, queueId);
+    }
+
+    /**
+     * @param queueId cannot be null
+     */
+    public Optional<Double> sendRequestAverageQueueAnswerTime(String queueId) {
+        return getAverageQueueAnswerTime(connectClient, queueId);
     }
 
     ///////// ^ END of Send Request Methods /////////
@@ -393,6 +400,36 @@ public class ConnectHandler {
 
             GetCurrentMetricDataResponse response = connectClient.getCurrentMetricData(metricRequest);
 
+            if (!response.metricResults().isEmpty()) {
+                return Optional.of(response.metricResults().get(0).collections().get(0).value());
+            }
+
+        } catch (ConnectException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+        return Optional.empty();
+    }
+
+    private Optional<Double> getAverageQueueAnswerTime(ConnectClient connectClient, String queueId) {
+        try {
+            List<MetricV2> metrics = new ArrayList<>(1);
+            MetricV2 metric = MetricV2.builder()
+                    .name("AVG_QUEUE_ANSWER_TIME")
+                    .build();
+            metrics.add(metric);
+
+            long currentEpochSecond = Instant.now().getEpochSecond();
+            long hourAgoEpochSecond = currentEpochSecond - (60 * 60);
+
+            GetMetricDataV2Request metricRequest = GetMetricDataV2Request.builder()
+                    .startTime(Instant.ofEpochSecond(hourAgoEpochSecond))
+                    .endTime(Instant.ofEpochSecond(currentEpochSecond))
+                    .metrics(metrics)
+                    .filters(getFilters(queueId, null))
+                    .resourceArn(instance.getResourceArn())
+                    .build();
+
+            GetMetricDataV2Response response = connectClient.getMetricDataV2(metricRequest);
             if (!response.metricResults().isEmpty()) {
                 return Optional.of(response.metricResults().get(0).collections().get(0).value());
             }

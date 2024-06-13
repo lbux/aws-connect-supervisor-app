@@ -12,16 +12,17 @@ public enum InsightType {
     SERVICE_LEVEL(new Type(1, "queue", "ServiceLevel")),
     AVG_HANDLE_TIME_QUEUE(new Type(2, "queue", "QueueAvgHandleTime")),
     AVG_HANDLE_TIME_AGENT(new Type(3, "agent", "AgentAvgHandleTime")),
-    QUEUE_LOAD(new Type(4, "queue", "QueueLoad"));
+    QUEUE_LOAD(new Type(4, "queue", "QueueLoad")),
+    QUEUE_ANSWER_TIME(new Type(5, "queue", "QueueAnswerTime"));
 
-    private final Type insightType;
+    private final Type type;
 
-    InsightType(Type insightType) {
-        this.insightType = insightType;
+    InsightType(Type type) {
+        this.type = type;
     }
 
-    public Type getInsightType() {
-        return this.insightType;
+    public Type getType() {
+        return this.type;
     }
 
     public record Type(int id,
@@ -33,9 +34,9 @@ public enum InsightType {
         @Override
         public void serialize(InsightType value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
             gen.writeStartObject();
-            gen.writeStringField("id", String.valueOf(value.getInsightType().id()));
-            gen.writeStringField("group", value.getInsightType().group());
-            gen.writeStringField("name", value.getInsightType().name());
+            gen.writeStringField("id", String.valueOf(value.getType().id()));
+            gen.writeStringField("group", value.getType().group());
+            gen.writeStringField("name", value.getType().name());
             gen.writeEndObject();
         }
     }

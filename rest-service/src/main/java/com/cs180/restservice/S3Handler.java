@@ -8,6 +8,7 @@ import software.amazon.awssdk.services.s3.model.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class S3Handler {
     private final S3Client s3Client;
@@ -16,17 +17,19 @@ public class S3Handler {
         s3Client = DependencyFactory.s3Client();
     }
 
-    public void listBuckets() {
+    public void sendRequestListBuckets() {
         listBuckets(s3Client);
     }
 
-    public void getAvgQueueAnswerTimeThreshold(String queueId) {
-        getAvgQueueAnswerTimeThreshold(s3Client, queueId);
+    public Optional<Double> sendRequestAvgQueueAnswerTimeThreshold(String queueId) {
+        return getAvgQueueAnswerTimeThreshold(s3Client, queueId);
     }
 
-    public void getAgentRecentSentimentScore(String agentId) {
+    public void sendRequestAgentRecentSentimentScore(String agentId) {
         getAgentRecentSentimentScore(s3Client, agentId);
     }
+
+    ///////// ^ END of Send Request Methods /////////
 
     private void listBuckets(S3Client s3Client) {
         try {
@@ -42,7 +45,7 @@ public class S3Handler {
         }
     }
 
-    private void getAvgQueueAnswerTimeThreshold(S3Client s3Client, String queueId) {
+    private Optional<Double> getAvgQueueAnswerTimeThreshold(S3Client s3Client, String queueId) {
         String bucketName = "metricsoutputbucket";
         String key = "thresholds.json";
 
@@ -60,8 +63,8 @@ public class S3Handler {
             for (JsonNode queue : queues) {
                 if (queue.get("queue_id").asText().equals(queueId)) {
                     double avgQueueAnswerTime = queue.get("metrics").get("AVG_QUEUE_ANSWER_TIME").asDouble();
-                    System.out.println("AVG_QUEUE_ANSWER_TIME for Queue " + queueId + ": " + avgQueueAnswerTime);
-                    return;
+//                    System.out.println("AVG_QUEUE_ANSWER_TIME for Queue " + queueId + ": " + avgQueueAnswerTime);
+                    return Optional.of(avgQueueAnswerTime);
                 }
             }
 
@@ -74,6 +77,7 @@ public class S3Handler {
             System.err.println("IOException: " + e.getMessage());
             System.exit(1);
         }
+        return Optional.empty();
     }
 
     private void getAgentRecentSentimentScore(S3Client s3Client, String agentId) {
