@@ -8,12 +8,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class QueueAnswerTimeController {
     private static final Logger logger = LoggerFactory.getLogger(QueueAnswerTimeController.class);
+    private static final DecimalFormat decfor = new DecimalFormat("0.00");
 
     @GetMapping("/answertime")
     public static Optional<Insights> getQueueAnswerTimeInsights(S3Handler s3Handler, ConnectHandler connectHandler) {
@@ -31,8 +33,8 @@ public class QueueAnswerTimeController {
                 Insight insight = new Insight(
                         InsightType.QUEUE_ANSWER_TIME,
                         historical_queueAnswerTimeValue.get(),
-                        "The " + queueName + " queue response time is " + (realtime_queueAnswerTimeValue.get() * 60) + " minutes, which is longer than the normal" + (realtime_queueAnswerTimeValue.get() * 60) + " minutes",
-                        "The longer " + queueName + " queue response time of " + (realtime_queueAnswerTimeValue.get() * 60) + " minutes indicates that there may be an issue with the queue's performance. This could be due to high call volume, insufficient agent staffing, or inefficient call handling processes.",
+                        "The " + queueName + " queue response time is " + decfor.format(realtime_queueAnswerTimeValue.get() / 60) + " minutes, which is longer than the normal " + decfor.format(historical_queueAnswerTimeValue.get() / 60) + " minutes",
+                        "The longer " + queueName + " queue response time of " + decfor.format(realtime_queueAnswerTimeValue.get() / 60) + " minutes indicates that there may be an issue with the queue's performance. This could be due to high call volume, insufficient agent staffing, or inefficient call handling processes.",
                         "As the supervisor, I recommend the following actions to address the longer queue response time: 1. Analyze the call volume and staffing levels to ensure adequate resources are available to handle the queue. 2. Provide additional training to agents on efficient call handling techniques, such as using call scripts and troubleshooting guides, to streamline conversations and reduce handling times.",
                         new Metadata(queueId, null, List.of(BedrockSource.TRAINING_PT1, BedrockSource.TRAINING_PT2)));
 

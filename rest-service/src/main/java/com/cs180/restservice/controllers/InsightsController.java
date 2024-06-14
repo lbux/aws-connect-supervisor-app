@@ -1,5 +1,6 @@
 package com.cs180.restservice.controllers;
 
+import com.cs180.restservice.S3Handler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,31 +21,32 @@ public class InsightsController {
 
         logger.info("/// TESTING LOGGER OUTPUT ///");
 
-        ConnectHandler handler = new ConnectHandler();
+        ConnectHandler connectHandler = new ConnectHandler();
+        S3Handler s3Handler = new S3Handler();
         
         logger.info("/// QUEUE STORE OUTPUT ///");
-        logger.info(handler.instance.getQueues().toString());
+        logger.info(connectHandler.instance.getQueues().toString());
 
         ArrayList<Insight> insightList = new ArrayList<>();
 
         // INSIGHT #1: queue's service level over 40%
-        ServiceLevelController.getServiceLevelQueueInsights(handler)
+        ServiceLevelController.getServiceLevelQueueInsights(connectHandler)
                 .map(Insights::insights)
                 .ifPresent(insightList::addAll);
 
         // INSIGHT #2: a queue or an agent's avg handling time is over 60 seconds
         // fix and change into: an agent's avg handling time is way over their queue level over 40%
-        AvgHandleTimeController.getAvgHandleTimeQueueInsights(handler)
+        AvgHandleTimeController.getAvgHandleTimeQueueInsights(connectHandler)
                 .map(Insights::insights)
                 .ifPresent(insightList::addAll);
 
         // INSIGHT #3: a queue's load (contacts waiting to agents available) ratio is greater than 2
-        QueueLoadController.getQueueLoadInsight(handler)
+        QueueLoadController.getQueueLoadInsight(connectHandler)
                 .map(Insights::insights)
                 .ifPresent(insightList::addAll);
 
         // INSIGHT #4: a queue's current answer time is longer than historical average
-        QueueLoadController.getQueueLoadInsight(handler)
+        QueueAnswerTimeController.getQueueAnswerTimeInsights(s3Handler, connectHandler)
                 .map(Insights::insights)
                 .ifPresent(insightList::addAll);
 
