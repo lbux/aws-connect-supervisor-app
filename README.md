@@ -3,6 +3,11 @@
 Repository for UCI ICS CS 180A/B Capstone Project with AWS Sponsor
 
 ## Steps to Run Backend
+
+Login with your IAM credentials (to access Connect, S3, and Bedrock):
+```bash
+aws sso login --profile [AccessProfileName]
+```
    
 ```bash
 cd rest-service
