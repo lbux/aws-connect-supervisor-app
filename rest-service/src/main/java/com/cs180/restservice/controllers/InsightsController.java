@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import com.cs180.restservice.ConnectHandler;
 import com.cs180.restservice.util.Insight;
 import com.cs180.restservice.util.Insights;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class InsightsController {
     private static final Logger logger = LoggerFactory.getLogger(InsightsController.class);
 
+    @CrossOrigin(origins = "http://localhost:53140")
     @GetMapping("/insights")
     public Insights insights() {
 
