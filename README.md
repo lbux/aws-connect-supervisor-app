@@ -8,7 +8,8 @@ Login with your IAM credentials (to access Connect, S3, and Bedrock):
 ```bash
 aws sso login --profile [AccessProfileName]
 ```
-   
+
+Navigate to the right folder and clean up any target files:
 ```bash
 cd rest-service
 mvn clean package
