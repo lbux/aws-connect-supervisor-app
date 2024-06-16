@@ -1,0 +1,579 @@
+[
+  {
+    "id": 1,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "ServiceLevel"
+    },
+    "value": 0.39,
+    "insight": "Service Level 15 for Basic Queue has dropped below 40%",
+    "reason": "The low service level for the Basic Queue indicates that too many contacts are waiting in the queue, resulting in long wait times for customers. This can lead to increased customer frustration and higher call abandonment rates, negatively impacting customer satisfaction and the overall performance of the contact center.",
+    "action": "To address this issue, I recommend: 1. Ensure that you have the appropriate number of agents staffed and available to handle incoming calls, especially during peak times. 2. Work with your team to efficiently handle each call, using call scripts and troubleshooting guides to streamline conversations and avoid lengthy, off-topic discussions.",
+    "metadata": {
+      "QueueId": "19dfef86-2020-46d3-b881-976564077825",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt1.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "QueueLoad"
+    },
+    "value": 3,
+    "insight": "VIP Line is overloaded with excessive number of contacts waiting",
+    "reason": "Reducing the average queue answer time is key to decreasing wait times on the VIP customer service line. Long answer times can lead to increased customer frustration and potential call abandonment, negatively affecting the overall customer experience. By consistently answering calls quickly, you can contribute to a more efficient and effective contact center operation, improving both service levels and customer perceptions of your responsiveness and reliability.",
+    "action": "To reduce wait times on the VIP customer service line, I recommend that you: 1. Stay focused and minimize distractions at your workstation. 2. Familiarize yourself with the call system and its features to expedite call resolution.",
+    "metadata": {
+      "QueueId": "9a36c43d-0b79-436e-b9f4-ceeb7753026e",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "QueueLoad"
+    },
+    "value": 5,
+    "insight": "Sales queue is overloaded with excessive number of contacts waiting",
+    "reason": "The high contact to agent ratio in the sales queue indicates that there are too many contacts waiting to be served by the available agents. This can lead to long wait times, which can frustrate customers and increase the likelihood of call abandonment, negatively impacting customer satisfaction and sales.",
+    "action": "To reduce wait times in the sales queue, I recommend: 1. Increase the number of agents available to handle the incoming calls. This can be done by ensuring agents are logged in and available during their scheduled shifts, and by being flexible with shift changes to accommodate peak demand periods. 2. Streamline the call-handling process by providing agents with effective call scripts, troubleshooting guides, and other tools to help them resolve customer issues quickly and efficiently, reducing the time spent on each call.",
+    "metadata": {
+      "QueueId": "78da3914-1bcc-4618-bf43-b70dc81f3578",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt1.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+        },
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "QueueAvgHandleTime"
+    },
+    "value": 2460.8,
+    "insight": "Support queue's average handling time is 41 minutes, which is much higher than last month's average of 25 minutes",
+    "reason": "Having a high average queue answer time can be a problem, as it leads to increased customer frustration and potential call abandonment, negatively affecting the overall customer experience. Long answer times can delay prompt assistance to customers, reducing their satisfaction and trust in the service.",
+    "action": "To address a high average queue answer time, I recommend that the agents: 1. Stay focused and minimize distractions at their workstations. 2. Familiarize themselves with the call system and its features to expedite call resolution. 3. Streamline their call-handling process by following established protocols and using available tools.",
+    "metadata": {
+      "QueueId": "60dd11a8-099b-4ca8-9886-2d0e1342393a",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "insightType": {
+      "id": "2",
+      "group": "Agent",
+      "name": "AgentAvgHandleTime"
+    },
+    "value": 1500.03475,
+    "insight": "Agent David’s average handling time is 25 minutes, which is much higher than the Basic queue's average handling time of 7 minutes",
+    "reason": "To reduce average handling time for agent David, the key is to focus on resolving customer issues more efficiently without compromising service quality.",
+    "action": "This involves being concise and focused during calls, following call resolution scripts and guidelines, and completing after-call work efficiently. Quickly identifying the customer's issue and using available resources and tools to expedite problem resolution can also help reduce handle time.",
+    "metadata": {
+      "AgentId": "5161c8bf-1c9d-4a26-9339-6064b2cd75d3",
+      "QueueId": "19dfef86-2020-46d3-b881-976564077825",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "QueueLoad"
+    },
+    "value": 5,
+    "insight": "Sales queue is overloaded with excessive number of contacts waiting",
+    "reason": "The high contact to agent ratio in the sales queue indicates that there are too many contacts waiting to be served by the available agents. This can lead to long wait times, which can frustrate customers and increase the likelihood of call abandonment, negatively impacting customer satisfaction and sales.",
+    "action": "To reduce wait times in the sales queue, I recommend: 1. Increase the number of agents available to handle the incoming calls. This can be done by ensuring agents are logged in and available during their scheduled shifts, and by being flexible with shift changes to accommodate peak demand periods. 2. Streamline the call-handling process by providing agents with effective call scripts, troubleshooting guides, and other tools to help them resolve customer issues quickly and efficiently, reducing the time spent on each call.",
+    "metadata": {
+      "QueueId": "78da3914-1bcc-4618-bf43-b70dc81f3578",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt1.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+        },
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "QueueAnswerTime"
+    },
+    "value": 180.2,
+    "insight": "The VIP queue response time is 3 minutes, which is longer than normal",
+    "reason": "The longer VIP queue response time of 3 minutes indicates that there may be an issue with the queue's performance. This could be due to high call volume, insufficient agent staffing, or inefficient call handling processes.",
+    "action": "As the supervisor, I recommend the following actions to address the longer VIP queue response time: 1. Analyze the call volume and staffing levels to ensure adequate resources are available to handle the VIP queue. 2. Provide additional training to agents on efficient call handling techniques, such as using call scripts and troubleshooting guides, to streamline conversations and reduce handling times.",
+    "metadata": {
+      "QueueId": "9a36c43d-0b79-436e-b9f4-ceeb7753026e",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt1.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+        },
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "ServiceLevel"
+    },
+    "value": 0.39,
+    "insight": "Service Level 15 for Basic Queue has dropped below 40%",
+    "reason": "The low service level for the Basic Queue indicates that too many contacts are waiting in the queue, resulting in long wait times for customers. This can lead to increased customer frustration and higher call abandonment rates, negatively impacting customer satisfaction and the overall performance of the contact center.",
+    "action": "To address this issue, I recommend: 1. Ensure that you have the appropriate number of agents staffed and available to handle incoming calls, especially during peak times. 2. Work with your team to efficiently handle each call, using call scripts and troubleshooting guides to streamline conversations and avoid lengthy, off-topic discussions.",
+    "metadata": {
+      "QueueId": "19dfef86-2020-46d3-b881-976564077825",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt1.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "QueueAnswerTime"
+    },
+    "value": 1620.1,
+    "insight": "The Sales queue response time is 27 minutes, which is longer than normal",
+    "reason": "The sales queue is experiencing longer than normal response times. This could be due to agents taking too long to respond to customer inquiries, leading to increased wait times and potential customer frustration.",
+    "action": "As the supervisor, I recommend the following actions to address the longer than normal sales queue response times: 1. Encourage agents to focus on resolving customer issues effectively and quickly, using call scripts and troubleshooting guides to streamline conversations. 2. Collaborate with the sales team to manage high call volumes, share best practices, and possibly redistribute calls to balance the workload.",
+    "metadata": {
+      "QueueId": "78da3914-1bcc-4618-bf43-b70dc81f3578",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt1.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+        },
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 10,
+    "insightType": {
+      "id": "2",
+      "group": "Agent",
+      "name": "Sentiment"
+    },
+    "value": -3.5,
+    "insight": "The past 5 contacts for agent Neeraja have shown a decline in average sentiment score",
+    "reason": "It seems that agent Neeraja may be struggling with high average handle time (AVG HANDLE TIME). The reason for this could be that he is not resolving customer issues efficiently and is getting sidetracked during calls, leading to longer call durations.",
+    "action": "To improve Neeraja’s customer service performance, I would recommend that he focus on resolving customer issues more efficiently without compromising service quality. This involves being concise and focused during calls, following the provided call resolution scripts and guidelines, and completing after-call work efficiently. She should also prioritize identifying the customer's issue quickly, using available resources and tools to expedite problem resolution, and avoiding unnecessary delays or tangents during the call.",
+    "metadata": {
+      "AgentId": "53a89caa-3e17-4f44-bf59-3095d8538892",
+      "QueueId": "78da3914-1bcc-4618-bf43-b70dc81f3578",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt1.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 11,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "QueueLoad"
+    },
+    "value": 5,
+    "insight": "Sales queue is overloaded with excessive number of contacts waiting",
+    "reason": "The high contact to agent ratio in the sales queue indicates that there are too many contacts waiting to be served by the available agents. This can lead to long wait times, which can frustrate customers and increase the likelihood of call abandonment, negatively impacting customer satisfaction and sales.",
+    "action": "To reduce wait times in the sales queue, I recommend: 1. Increase the number of agents available to handle the incoming calls. This can be done by ensuring agents are logged in and available during their scheduled shifts, and by being flexible with shift changes to accommodate peak demand periods. 2. Streamline the call-handling process by providing agents with effective call scripts, troubleshooting guides, and other tools to help them resolve customer issues quickly and efficiently, reducing the time spent on each call.",
+    "metadata": {
+      "QueueId": "78da3914-1bcc-4618-bf43-b70dc81f3578",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt1.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+        },
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 12,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "ServiceLevel"
+    },
+    "value": 0.39,
+    "insight": "Service Level 15 for Basic Queue has dropped below 40%",
+    "reason": "The low service level for the Basic Queue indicates that too many contacts are waiting in the queue, resulting in long wait times for customers. This can lead to increased customer frustration and higher call abandonment rates, negatively impacting customer satisfaction and the overall performance of the contact center.",
+    "action": "To address this issue, I recommend: 1. Ensure that you have the appropriate number of agents staffed and available to handle incoming calls, especially during peak times. 2. Work with your team to efficiently handle each call, using call scripts and troubleshooting guides to streamline conversations and avoid lengthy, off-topic discussions.",
+    "metadata": {
+      "QueueId": "19dfef86-2020-46d3-b881-976564077825",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt1.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 13,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "QueueAnswerTime"
+    },
+    "value": 180.2,
+    "insight": "The VIP queue response time is 3 minutes, which is longer than normal",
+    "reason": "The longer VIP queue response time of 3 minutes indicates that there may be an issue with the queue's performance. This could be due to high call volume, insufficient agent staffing, or inefficient call handling processes.",
+    "action": "As the supervisor, I recommend the following actions to address the longer VIP queue response time: 1. Analyze the call volume and staffing levels to ensure adequate resources are available to handle the VIP queue. 2. Provide additional training to agents on efficient call handling techniques, such as using call scripts and troubleshooting guides, to streamline conversations and reduce handling times.",
+    "metadata": {
+      "QueueId": "9a36c43d-0b79-436e-b9f4-ceeb7753026e",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt1.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+        },
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 14,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "QueueAvgHandleTime"
+    },
+    "value": 1200.8,
+    "insight": "VIP queue's average handling time is 20 minutes, which is higher than last month's average of 9 minutes",
+    "reason": "The reason for the increase in the VIP queue's average handling time from 9 minutes to 20 minutes could be that agents are taking longer to resolve customer issues or are getting distracted during calls. This can lead to longer wait times for VIP customers, which can negatively impact their satisfaction and perception of the contact center's service quality.",
+    "action": "To address this issue, I recommend that you: 1. Provide additional training to agents on efficient call handling techniques and customer service best practices. 2. Implement a quality assurance program to monitor and provide feedback on agent performance in the VIP queue.",
+    "metadata": {
+      "QueueId": "9a36c43d-0b79-436e-b9f4-ceeb7753026e",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt1.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+        },
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 15,
+    "insightType": {
+      "id": "2",
+      "group": "Agent",
+      "name": "Sentiment"
+    },
+    "value": -2,
+    "insight": "The past 5 contacts for agent Xiling have shown a decline in average sentiment score",
+    "reason": "Agent Xiling may be experiencing a decline in their average sentiment score. This could be due to a pattern of interactions that start positively but end negatively. The reason for this decline could be that the agent is not effectively engaging with customers in an empathetic manner or is not consistently applying successful strategies to maintain positive sentiment throughout the interaction.",
+    "action": "To address this issue, I would recommend that agent Xiling: 1. Monitor trends in their sentiment scores and analyze what might be causing the negative shift in interactions. 2. Identify the techniques and approaches that led to positive outcomes in past interactions and consistently apply those strategies.",
+    "metadata": {
+      "AgentId": "76f4f77a-aa1a-4d98-b802-cd236365ab57",
+      "QueueId": "60dd11a8-099b-4ca8-9886-2d0e1342393a",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt3.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt3.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 16,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "QueueAnswerTime"
+    },
+    "value": 180.2,
+    "insight": "The VIP queue response time is 3 minutes, which is longer than normal",
+    "reason": "The longer VIP queue response time of 3 minutes indicates that there may be an issue with the queue's performance. This could be due to high call volume, insufficient agent staffing, or inefficient call handling processes.",
+    "action": "As the supervisor, I recommend the following actions to address the longer VIP queue response time: 1. Analyze the call volume and staffing levels to ensure adequate resources are available to handle the VIP queue. 2. Provide additional training to agents on efficient call handling techniques, such as using call scripts and troubleshooting guides, to streamline conversations and reduce handling times.",
+    "metadata": {
+      "QueueId": "9a36c43d-0b79-436e-b9f4-ceeb7753026e",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt1.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+        },
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 17,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "QueueLoad"
+    },
+    "value": 3,
+    "insight": "VIP Line is overloaded with excessive number of contacts waiting",
+    "reason": "Reducing the average queue answer time is key to decreasing wait times on the VIP customer service line. Long answer times can lead to increased customer frustration and potential call abandonment, negatively affecting the overall customer experience. By consistently answering calls quickly, you can contribute to a more efficient and effective contact center operation, improving both service levels and customer perceptions of your responsiveness and reliability.",
+    "action": "To reduce wait times on the VIP customer service line, I recommend that you: 1. Stay focused and minimize distractions at your workstation. 2. Familiarize yourself with the call system and its features to expedite call resolution.",
+    "metadata": {
+      "QueueId": "9a36c43d-0b79-436e-b9f4-ceeb7753026e",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 18,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "QueueAvgHandleTime"
+    },
+    "value": 2460.8,
+    "insight": "Support queue's average handling time is 41 minutes, which is much higher than last month's average of 25 minutes",
+    "reason": "Having a high average queue answer time can be a problem, as it leads to increased customer frustration and potential call abandonment, negatively affecting the overall customer experience. Long answer times can delay prompt assistance to customers, reducing their satisfaction and trust in the service.",
+    "action": "To address a high average queue answer time, I recommend that the agents: 1. Stay focused and minimize distractions at their workstations. 2. Familiarize themselves with the call system and its features to expedite call resolution. 3. Streamline their call-handling process by following established protocols and using available tools.",
+    "metadata": {
+      "QueueId": "60dd11a8-099b-4ca8-9886-2d0e1342393a",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 19,
+    "insightType": {
+      "id": "2",
+      "group": "Agent",
+      "name": "Sentiment"
+    },
+    "value": -4,
+    "insight": "The past 5 contacts for agent David have shown a decline in average sentiment score",
+    "reason": "It appears that agent David is underperforming in terms of sentiment scores. The reason for this could be that his interactions with customers start positively but end negatively, indicating he may not be engaging empathetically or addressing customer concerns effectively.",
+    "action": "To improve agent David's average sentiment score, I recommend the following actions: 1. Monitor trends in his interactions and identify patterns where the sentiment shifts from positive to negative. 2. Analyze successful interactions where the sentiment shifted from negative to positive, and have him consistently apply the techniques and approaches that led to those positive outcomes.",
+    "metadata": {
+      "AgentId": "5161c8bf-1c9d-4a26-9339-6064b2cd75d3",
+      "QueueId": "19dfef86-2020-46d3-b881-976564077825",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt3.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt3.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 20,
+    "insightType": {
+      "id": "2",
+      "group": "Agent",
+      "name": "AgentAvgHandleTime"
+    },
+    "value": 2580.36273,
+    "insight": "Agent Xiling’s average handling time is 43 minutes, which is much higher than the Support queue's average handling time of 15 minutes",
+    "reason": "Reducing the average handling time (AHT) of agents can improve customer satisfaction and the overall efficiency of the contact center. Shorter AHT ensures customers are assisted promptly, which enhances their experience and reduces frustration from long wait times.",
+    "action": "To help agent Xiling reduce their AHT, I recommend the following actions: 1. Monitor and provide feedback on their average response time during interactions to identify areas for improvement. 2. Provide training on effective multitasking and responsiveness techniques to help them handle calls more efficiently.",
+    "metadata": {
+      "AgentId": "5161c8bf-1c9d-4a26-9339-6064b2cd75d3",
+      "QueueId": "60dd11a8-099b-4ca8-9886-2d0e1342393a",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        },
+        {
+          "SourceName": "AgentTrainingManual_Pt3.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt3.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 21,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "ServiceLevel"
+    },
+    "value": 0.381,
+    "insight": "Service Level 15 for VIP Queue has dropped below 40%",
+    "reason": "To improve the service level for the VIP queue, the key is to ensure adequate staffing to handle the incoming call volume. Having the appropriate number of agents staffed is crucial for maintaining service levels and reducing wait times.",
+    "action": "If the VIP queue is experiencing long wait times, it is recommended to: 1. Ensure agents are logged in and available to take calls as scheduled, adhering to shift schedules and promptly returning from breaks. 2. Communicate any schedule changes or personal issues promptly to the supervisor to avoid unexpected understaffing.",
+    "metadata": {
+      "QueueId": "9a36c43d-0b79-436e-b9f4-ceeb7753026e",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt1.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 22,
+    "insightType": {
+      "id": "1",
+      "group": "Queue",
+      "name": "QueueAnswerTime"
+    },
+    "value": 180.2,
+    "insight": "The VIP queue response time is 3 minutes, which is longer than normal",
+    "reason": "The longer VIP queue response time of 3 minutes indicates that there may be an issue with the queue's performance. This could be due to high call volume, insufficient agent staffing, or inefficient call handling processes.",
+    "action": "As the supervisor, I recommend the following actions to address the longer VIP queue response time: 1. Analyze the call volume and staffing levels to ensure adequate resources are available to handle the VIP queue. 2. Provide additional training to agents on efficient call handling techniques, such as using call scripts and troubleshooting guides, to streamline conversations and reduce handling times.",
+    "metadata": {
+      "QueueId": "9a36c43d-0b79-436e-b9f4-ceeb7753026e",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt1.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt1.pdf?region=us-west-2"
+        },
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 23,
+    "insightType": {
+      "id": "2",
+      "group": "Agent",
+      "name": "Sentiment"
+    },
+    "value": -4,
+    "insight": "The past 5 contacts for agent David have shown a decline in average sentiment score",
+    "reason": "It appears that agent David is underperforming in terms of sentiment scores. The reason for this could be that his interactions with customers start positively but end negatively, indicating he may not be engaging empathetically or addressing customer concerns effectively.",
+    "action": "To improve agent David's average sentiment score, I recommend the following actions: 1. Monitor trends in his interactions and identify patterns where the sentiment shifts from positive to negative. 2. Analyze successful interactions where the sentiment shifted from negative to positive, and have him consistently apply the techniques and approaches that led to those positive outcomes.",
+    "metadata": {
+      "AgentId": "5161c8bf-1c9d-4a26-9339-6064b2cd75d3",
+      "QueueId": "19dfef86-2020-46d3-b881-976564077825",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt3.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt3.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 24,
+    "insightType": {
+      "id": "2",
+      "group": "Agent",
+      "name": "AgentAvgHandleTime"
+    },
+    "value": 2580.36273,
+    "insight": "Agent Xiling’s average handling time is 43 minutes, which is much higher than the Support queue's average handling time of 15 minutes",
+    "reason": "Reducing the average handling time (AHT) of agents can improve customer satisfaction and the overall efficiency of the contact center. Shorter AHT ensures customers are assisted promptly, which enhances their experience and reduces frustration from long wait times.",
+    "action": "To help agent Xiling reduce their AHT, I recommend the following actions: 1. Monitor and provide feedback on their average response time during interactions to identify areas for improvement. 2. Provide training on effective multitasking and responsiveness techniques to help them handle calls more efficiently.",
+    "metadata": {
+      "AgentId": "5161c8bf-1c9d-4a26-9339-6064b2cd75d3",
+      "QueueId": "60dd11a8-099b-4ca8-9886-2d0e1342393a",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        },
+        {
+          "SourceName": "AgentTrainingManual_Pt3.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt3.pdf?region=us-west-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": 25,
+    "insightType": {
+      "id": "2",
+      "group": "Agent",
+      "name": "AgentAvgHandleTime"
+    },
+    "value": 1200.66289,
+    "insight": "Agent Jessica’s average handling time is 20 minutes, which is much higher than the VIP Line’s average handling time of 5 minutes",
+    "reason": "The reason for Agent Jessica's high average handling time of 20 minutes compared to the VIP Line's average of 5 minutes could be that she is not resolving customer issues efficiently. She may be taking too long to identify the customer's problem, not using available resources and tools effectively, or getting sidetracked during the call.",
+    "action": "To address this issue, I would recommend that you: 1. Provide additional training to Agent Jessica on call resolution techniques and time management. 2. Monitor her calls more closely and provide feedback on how to streamline her call-handling process.",
+    "metadata": {
+      "AgentId": "16c8e85d-84da-43c5-8944-a30e4bee209f",
+      "QueueId": "9a36c43d-0b79-436e-b9f4-ceeb7753026e",
+      "BedrockSources": [
+        {
+          "SourceName": "AgentTrainingManual_Pt2.pdf",
+          "SourceLink": "https://us-west-2.console.aws.amazon.com/s3/buckets/training-manual-bucket/AgentTrainingManual_Pt2.pdf?region=us-west-2"
+        }
+      ]
+    }
+  }
+]

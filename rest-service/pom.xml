@@ -163,6 +163,12 @@
 				<version>3.8.1</version> <!-- Specify a version for the maven-compiler-plugin -->
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
 	</build>
 
 </project>

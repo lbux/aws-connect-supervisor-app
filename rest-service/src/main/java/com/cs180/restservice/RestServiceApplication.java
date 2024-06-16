@@ -20,6 +20,7 @@ public class RestServiceApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/insights").allowedOrigins("http://localhost:53140");
+				registry.addMapping("/insights-list").allowedOrigins("http://localhost:53140");
 			}
 		};
 	}
