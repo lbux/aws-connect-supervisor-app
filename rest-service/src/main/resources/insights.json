@@ -23,7 +23,7 @@
   {
     "id": 2,
     "insightType": {
-      "id": "1",
+      "id": "4",
       "group": "Queue",
       "name": "QueueLoad"
     },
@@ -44,7 +44,7 @@
   {
     "id": 3,
     "insightType": {
-      "id": "1",
+      "id": "4",
       "group": "Queue",
       "name": "QueueLoad"
     },
@@ -69,7 +69,7 @@
   {
     "id": 4,
     "insightType": {
-      "id": "1",
+      "id": "2",
       "group": "Queue",
       "name": "QueueAvgHandleTime"
     },
@@ -90,7 +90,7 @@
   {
     "id": 5,
     "insightType": {
-      "id": "2",
+      "id": "3",
       "group": "Agent",
       "name": "AgentAvgHandleTime"
     },
@@ -112,7 +112,7 @@
   {
     "id": 6,
     "insightType": {
-      "id": "1",
+      "id": "4",
       "group": "Queue",
       "name": "QueueLoad"
     },
@@ -137,7 +137,7 @@
   {
     "id": 7,
     "insightType": {
-      "id": "1",
+      "id": "5",
       "group": "Queue",
       "name": "QueueAnswerTime"
     },
@@ -183,7 +183,7 @@
   {
     "id": 9,
     "insightType": {
-      "id": "1",
+      "id": "5",
       "group": "Queue",
       "name": "QueueAnswerTime"
     },
@@ -208,9 +208,9 @@
   {
     "id": 10,
     "insightType": {
-      "id": "2",
+      "id": "6",
       "group": "Agent",
-      "name": "Sentiment"
+      "name": "AgentSentiment"
     },
     "value": -3.5,
     "insight": "The past 5 contacts for agent Neeraja have shown a decline in average sentiment score",
@@ -230,7 +230,7 @@
   {
     "id": 11,
     "insightType": {
-      "id": "1",
+      "id": "4",
       "group": "Queue",
       "name": "QueueLoad"
     },
@@ -276,7 +276,7 @@
   {
     "id": 13,
     "insightType": {
-      "id": "1",
+      "id": "5",
       "group": "Queue",
       "name": "QueueAnswerTime"
     },
@@ -301,7 +301,7 @@
   {
     "id": 14,
     "insightType": {
-      "id": "1",
+      "id": "2",
       "group": "Queue",
       "name": "QueueAvgHandleTime"
     },
@@ -326,9 +326,9 @@
   {
     "id": 15,
     "insightType": {
-      "id": "2",
+      "id": "6",
       "group": "Agent",
-      "name": "Sentiment"
+      "name": "AgentSentiment"
     },
     "value": -2,
     "insight": "The past 5 contacts for agent Xiling have shown a decline in average sentiment score",
@@ -348,7 +348,7 @@
   {
     "id": 16,
     "insightType": {
-      "id": "1",
+      "id": "5",
       "group": "Queue",
       "name": "QueueAnswerTime"
     },
@@ -373,7 +373,7 @@
   {
     "id": 17,
     "insightType": {
-      "id": "1",
+      "id": "4",
       "group": "Queue",
       "name": "QueueLoad"
     },
@@ -394,7 +394,7 @@
   {
     "id": 18,
     "insightType": {
-      "id": "1",
+      "id": "2",
       "group": "Queue",
       "name": "QueueAvgHandleTime"
     },
@@ -415,9 +415,9 @@
   {
     "id": 19,
     "insightType": {
-      "id": "2",
+      "id": "6",
       "group": "Agent",
-      "name": "Sentiment"
+      "name": "AgentSentiment"
     },
     "value": -4,
     "insight": "The past 5 contacts for agent David have shown a decline in average sentiment score",
@@ -437,7 +437,7 @@
   {
     "id": 20,
     "insightType": {
-      "id": "2",
+      "id": "3",
       "group": "Agent",
       "name": "AgentAvgHandleTime"
     },
@@ -484,7 +484,7 @@
   {
     "id": 22,
     "insightType": {
-      "id": "1",
+      "id": "5",
       "group": "Queue",
       "name": "QueueAnswerTime"
     },
@@ -509,9 +509,9 @@
   {
     "id": 23,
     "insightType": {
-      "id": "2",
+      "id": "6",
       "group": "Agent",
-      "name": "Sentiment"
+      "name": "AgentSentiment"
     },
     "value": -4,
     "insight": "The past 5 contacts for agent David have shown a decline in average sentiment score",
@@ -531,7 +531,7 @@
   {
     "id": 24,
     "insightType": {
-      "id": "2",
+      "id": "3",
       "group": "Agent",
       "name": "AgentAvgHandleTime"
     },
@@ -557,7 +557,7 @@
   {
     "id": 25,
     "insightType": {
-      "id": "2",
+      "id": "3",
       "group": "Agent",
       "name": "AgentAvgHandleTime"
     },

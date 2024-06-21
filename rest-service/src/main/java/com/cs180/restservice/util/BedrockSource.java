@@ -1,8 +1,9 @@
 package com.cs180.restservice.util;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.IOException;
@@ -19,8 +20,17 @@ public enum BedrockSource {
         this.source = source;
     }
 
-    public Source getInsightType() {
+    public Source getSource() {
         return this.source;
+    }
+
+    public static BedrockSource fromType(BedrockSource.Source source) {
+        for (BedrockSource bedrockSource : values()) {
+            if (bedrockSource.source.equals(source)) {
+                return bedrockSource;
+            }
+        }
+        throw new IllegalArgumentException("Unknown source: " + source);
     }
 
     public record Source(
@@ -32,9 +42,21 @@ public enum BedrockSource {
         @Override
         public void serialize(BedrockSource value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
             gen.writeStartObject();
-            gen.writeStringField("SourceName", value.getInsightType().sourceName());
-            gen.writeStringField("SourceLink", value.getInsightType().sourceLink());
+            gen.writeStringField("SourceName", value.getSource().sourceName());
+            gen.writeStringField("SourceLink", value.getSource().sourceLink());
             gen.writeEndObject();
+        }
+    }
+
+    public static class BedrockSourceDeserializer extends JsonDeserializer<BedrockSource> {
+        @Override
+        public BedrockSource deserialize(JsonParser p, DeserializationContext ctxt)
+                throws IOException, JsonProcessingException {
+            JsonNode node = p.getCodec().readTree(p);
+            String SourceName = node.get("SourceName").asText();
+            String SourceLink = node.get("SourceLink").asText();
+
+            return BedrockSource.fromType(new BedrockSource.Source(SourceName, SourceLink));
         }
     }
 }

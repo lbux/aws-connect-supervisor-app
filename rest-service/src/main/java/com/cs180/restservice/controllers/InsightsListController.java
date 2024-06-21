@@ -26,7 +26,7 @@ public class InsightsListController {
     public Optional<Insights> insightsList() {
         Insights insights = new Insights();
         try {
-            insights.insights().addAll(insightService.loadInsightsFromFile("src/main/resources/insights.json"));
+            insights.insights().addAll(insightService.loadInsightsFromFile("insights.json"));
         } catch (IOException e) {
             e.printStackTrace();
             return Optional.empty();
