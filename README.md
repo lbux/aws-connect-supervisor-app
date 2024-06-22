@@ -49,9 +49,9 @@ This will list all available devices. Then, use the following command to run on 
 
 ### Backend Integration
 
-The current implementation has logic in `lib/app/services/insight_services.dart` to read from an `insights.json` file located in `assets/insight.json`.
+The current implementation has logic in `lib/app/services/insight_services.dart` to read from a demo `insights.json` file located in `assets/insight.json` as a fallback method.
 
-To make the app work directly with the [backend](https://github.com/lbux/aws-connect-supervisor-app/tree/backend), you need to add code to make a request to the backend, which returns the data in JSON format.
+To make the app work directly with the [backend](https://github.com/lbux/aws-connect-supervisor-app/tree/backend), follow the instructions in the backend branch and run the frontend code as usual.
 
 _**Aws Connect Supervisor App works on iOS, Android, Web, and Windows.**_
 
