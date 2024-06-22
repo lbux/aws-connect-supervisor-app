@@ -10,7 +10,7 @@ class InsightService {
 
   // Fetch insights from the server
   Future<void> fetchInsights() async {
-    final url = Uri.parse('http://localhost:8080/insights');
+    final url = Uri.parse('http://localhost:8080/insights-list');
 
     try {
       final response = await http.get(url);
