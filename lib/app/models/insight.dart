@@ -31,23 +31,26 @@ class Insight {
   final Map<String, dynamic> metadata;
 
   String get buttonLabel {
-    return insightType.name;
+    return insightType.group;
   }
 }
 
 class InsightType {
   InsightType({
     required this.id,
+    required this.group,
     required this.name,
   });
 
   factory InsightType.fromJson(Map<String, dynamic> json) {
     return InsightType(
       id: json['id'] as String,
+      group: json['group'] as String,
       name: json['name'] as String,
     );
   }
 
   final String id;
+  final String group;
   final String name;
 }
